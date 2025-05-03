@@ -14,7 +14,7 @@ import {
 import "@xyflow/react/dist/base.css";
 import { RiAddLine, RiSubtractLine, RiFullscreenLine } from "@remixicon/react";
 import { Button } from "@/components/ui/button";
-import TableNode from "@/components/table-node";
+import TableNode from "@/components/nodes/table-node";
 import SchemaEdge from "@/components/schema-edge";
 import { initialNodes, initialEdges } from "@/lib/schema-data";
 
@@ -78,7 +78,7 @@ function SchemaVisualizerInner() {
                     />
 
                     <Panel
-                        position="bottom-right"
+                        position="bottom-left"
                         className="inline-flex -space-x-px rounded-md shadow-xs rtl:space-x-reverse"
                     >
                         <Button

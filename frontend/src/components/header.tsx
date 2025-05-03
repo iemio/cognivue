@@ -14,8 +14,7 @@ export default function Header() {
                     <Link className="inline-flex" href="/">
                         <svg
                             id="logo-58"
-                            width="45"
-                            height="45"
+                            className="w-[37px] h-[37px] sm:w-[41px] sm:h-[41px] md:w-[45px] md:h-[45px]"
                             viewBox="0 0 50 50"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
