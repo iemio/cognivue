@@ -28,7 +28,9 @@ const edgeTypes = {
 };
 
 function SchemaVisualizerInner() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
     const reactFlowWrapper = useRef<HTMLDivElement>(null);
     const { fitView, zoomIn, zoomOut } = useReactFlow();
