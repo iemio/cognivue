@@ -13,11 +13,12 @@ import { defaultActions } from "@/lib/actions";
 import { Action } from "@/types/action";
 
 const actions: Action[] = [
-    ...defaultActions,
     {
         name: "Export Schema",
         action: "exportSchema",
     },
+
+    ...defaultActions,
 ];
 
 const ActionCenter = () => {
@@ -50,7 +51,7 @@ const ActionCenter = () => {
                             <DropdownMenuItem onClick={() => {}}>
                                 {action.name}
                             </DropdownMenuItem>
-                            {nextAction && !nextAction.default && isDefault && (
+                            {nextAction && nextAction.default && !isDefault && (
                                 <DropdownMenuSeparator />
                             )}
                         </div>

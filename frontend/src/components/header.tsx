@@ -16,7 +16,7 @@ export default function Header() {
             <div className="border border-border/80 rounded-xl bg-card/80 backdrop-blur-md h-12 md:h-16 flex justify-between items-center gap-2 px-4 shadow-lg/2">
                 {/* Left area */}
                 <div className="flex-1 flex items-center gap-2">
-                    <Link className="inline-flex" href="/">
+                    <Link className="inline-flex" href="/dashboard">
                         <LogoIcon />
                     </Link>
                     <ActionCenter />
