@@ -82,7 +82,7 @@ import {
     Plus,
     Trash,
 } from "lucide-react";
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 type Item = {
     id: string;
