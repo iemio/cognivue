@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import {
     ReactFlow,
     ReactFlowProvider,
@@ -12,11 +12,18 @@ import {
     BackgroundVariant,
 } from "@xyflow/react";
 import "@xyflow/react/dist/base.css";
-import { RiAddLine, RiSubtractLine, RiFullscreenLine } from "@remixicon/react";
+import {
+    RiAddLine,
+    RiSubtractLine,
+    RiFullscreenLine,
+    RiSunLine,
+    RiMoonClearLine,
+} from "@remixicon/react";
 import { Button } from "@/components/ui/button";
 import TableNode from "@/components/nodes/table-node";
 import SchemaEdge from "@/components/schema-edge";
 import { initialNodes, initialEdges } from "@/lib/schema-data";
+import { useTheme } from "next-themes";
 
 // Register custom node types and edge types
 const nodeTypes = {
@@ -38,6 +45,28 @@ function SchemaVisualizerInner() {
     const onFitView = useCallback(() => {
         fitView({ padding: 0.2 });
     }, [fitView]);
+
+    const { theme, setTheme } = useTheme();
+    const [system, setSystem] = useState(false);
+
+    const smartToggle = () => {
+        const prefersDarkScheme = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        ).matches;
+        if (theme === "system") {
+            setTheme(prefersDarkScheme ? "light" : "dark");
+            setSystem(false);
+        } else if (
+            (theme === "light" && !prefersDarkScheme) ||
+            (theme === "dark" && prefersDarkScheme)
+        ) {
+            setTheme(theme === "light" ? "dark" : "light");
+            setSystem(false);
+        } else {
+            setTheme("system");
+            setSystem(true);
+        }
+    };
 
     return (
         <main className="flex-1 flex items-stretch">
@@ -84,7 +113,7 @@ function SchemaVisualizerInner() {
                         <Button
                             variant="outline"
                             size="icon"
-                            className="text-muted-foreground/80 hover:text-muted-foreground rounded-none shadow-none first:rounded-s-lg last:rounded-e-lg size-10 focus-visible:z-10 bg-card"
+                            className="text-muted-foreground/80 hover:text-muted-foreground rounded-none shadow-none first:rounded-s-lg last:rounded-e-lg size-10 focus-visible:z-10 bg-card cursor-pointer"
                             onClick={() => zoomIn()}
                             aria-label="Zoom in"
                         >
@@ -93,7 +122,7 @@ function SchemaVisualizerInner() {
                         <Button
                             variant="outline"
                             size="icon"
-                            className="text-muted-foreground/80 hover:text-muted-foreground rounded-none shadow-none first:rounded-s-lg last:rounded-e-lg size-10 focus-visible:z-10 bg-card"
+                            className="cursor-pointer text-muted-foreground/80 hover:text-muted-foreground rounded-none shadow-none first:rounded-s-lg last:rounded-e-lg size-10 focus-visible:z-10 bg-card"
                             onClick={() => zoomOut()}
                             aria-label="Zoom out"
                         >
@@ -105,12 +134,28 @@ function SchemaVisualizerInner() {
                         <Button
                             variant="outline"
                             size="icon"
-                            className="text-muted-foreground/80 hover:text-muted-foreground rounded-none shadow-none first:rounded-s-lg last:rounded-e-lg size-10 focus-visible:z-10 bg-card"
+                            className="text-muted-foreground/80 hover:text-muted-foreground rounded-none shadow-none first:rounded-s-lg last:rounded-e-lg size-10 focus-visible:z-10 bg-card cursor-pointer"
                             onClick={onFitView}
                             aria-label="Fit view"
                         >
                             <RiFullscreenLine
                                 className="size-5"
+                                aria-hidden="true"
+                            />
+                        </Button>
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            className="text-muted-foreground/80 hover:text-muted-foreground rounded-none shadow-none first:rounded-s-lg last:rounded-e-lg size-10 focus-visible:z-10 bg-card cursor-pointer"
+                            onClick={smartToggle}
+                            aria-label="Fit view"
+                        >
+                            <RiSunLine
+                                className="dark:hidden size-5"
+                                aria-hidden="true"
+                            />
+                            <RiMoonClearLine
+                                className="hidden dark:block size-5"
                                 aria-hidden="true"
                             />
                         </Button>
