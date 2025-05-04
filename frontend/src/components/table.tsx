@@ -234,53 +234,6 @@ export default function TableComponent() {
         },
     });
 
-    // Get unique status values
-    const uniqueStatusValues = useMemo(() => {
-        const statusColumn = table.getColumn("status");
-
-        if (!statusColumn) return [];
-
-        const values = Array.from(statusColumn.getFacetedUniqueValues().keys());
-
-        return values.sort();
-    }, [table.getColumn("status")?.getFacetedUniqueValues()]);
-
-    // Get counts for each status
-    const statusCounts = useMemo(() => {
-        const statusColumn = table.getColumn("status");
-        if (!statusColumn) return new Map();
-        return statusColumn.getFacetedUniqueValues();
-    }, [table.getColumn("status")?.getFacetedUniqueValues()]);
-
-    const selectedStatuses = useMemo(() => {
-        const filterValue = table
-            .getColumn("status")
-            ?.getFilterValue() as string[];
-        return filterValue ?? [];
-    }, [table.getColumn("status")?.getFilterValue()]);
-
-    const handleStatusChange = (checked: boolean, value: string) => {
-        const filterValue = table
-            .getColumn("status")
-            ?.getFilterValue() as string[];
-        const newFilterValue = filterValue ? [...filterValue] : [];
-
-        if (checked) {
-            newFilterValue.push(value);
-        } else {
-            const index = newFilterValue.indexOf(value);
-            if (index > -1) {
-                newFilterValue.splice(index, 1);
-            }
-        }
-
-        table
-            .getColumn("status")
-            ?.setFilterValue(
-                newFilterValue.length ? newFilterValue : undefined
-            );
-    };
-
     return (
         <div className="space-y-4 max-w-[1000px]">
             {/* Filters */}
@@ -715,7 +668,7 @@ export default function TableComponent() {
         </div>
     );
 }
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function RowActions({ row }: { row: Row<Item> }) {
     return (
         <DropdownMenu>

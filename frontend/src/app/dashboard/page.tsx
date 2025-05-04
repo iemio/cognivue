@@ -1,12 +1,12 @@
 "use client";
-import { AnimatePresence, useAnimate, usePresence } from "motion/react";
+// import { AnimatePresence, useAnimate, usePresence } from "motion/react";
 import React, { useEffect, useState } from "react";
-import {
-    Clock as FiClock,
-    Plus as FiPlus,
-    Trash2 as FiTrash2,
-} from "lucide-react";
-import { motion } from "motion/react";
+// import {
+//     Clock as FiClock,
+//     Plus as FiPlus,
+//     Trash2 as FiTrash2,
+// } from "lucide-react";
+// import { motion } from "motion/react";
 import TabsComponent from "@/components/tabs";
 
 export default function VanishList() {
@@ -18,33 +18,6 @@ export default function VanishList() {
         const svg = `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke-width='2' stroke='${strokeColor}'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`;
         setBgImage(svg);
     }, []);
-
-    const [todos, setTodos] = useState([
-        {
-            id: 1,
-            text: "Take out trash",
-            checked: false,
-            time: "5 mins",
-        },
-        {
-            id: 2,
-            text: "Do laundry",
-            checked: false,
-            time: "10 mins",
-        },
-        {
-            id: 3,
-            text: "Have existential crisis",
-            checked: true,
-            time: "12 hrs",
-        },
-        {
-            id: 4,
-            text: "Get dog food",
-            checked: false,
-            time: "1 hrs",
-        },
-    ]);
 
     // const handleCheck = (id) => {
     //     setTodos((pv) =>
@@ -89,7 +62,7 @@ const Header = () => {
                 Good morning user! ☀️
             </h1>
             <p className="text-zinc-400">
-                Let's see what we need to work on today.
+                Let&apos;s see what we need to work on today.
             </p>
         </div>
     );

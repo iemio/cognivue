@@ -61,7 +61,7 @@ const Header: React.FC = () => (
     <div className="mb-6 text-center">
         <h1 className="text-2xl font-semibold">Sign in to your account</h1>
         <p className="mt-2 text-zinc-500 dark:text-zinc-400">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <a
                 href="#"
                 className="text-blue-600 dark:text-blue-400 hover:underline"
