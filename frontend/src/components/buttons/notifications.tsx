@@ -133,7 +133,7 @@ export default function Notifications() {
                     </kbd>
                 </TooltipContent>
             </Tooltip>
-            <PopoverContent className="w-80 p-1 mt-1 mr-2">
+            <PopoverContent className="w-80 p-1 mt-1 mr-4">
                 <div className="flex items-baseline justify-between gap-4 px-3 py-2">
                     <div className="text-sm font-semibold">Comments</div>
                     {unreadCount > 0 && (

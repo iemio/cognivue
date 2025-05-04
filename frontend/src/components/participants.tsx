@@ -34,7 +34,7 @@ export default function Participants() {
             {visibleParticipants.map((participant, index) => (
                 <div key={index} className="size-8">
                     <Image
-                        className="shrink-0 ring-background rounded-full ring-2"
+                        className="shrink-0 ring-secondary rounded-full ring-2"
                         src={participant.avatarURL}
                         width={32}
                         height={32}
@@ -46,7 +46,7 @@ export default function Participants() {
             {extraCount > 0 && (
                 <Button
                     variant="secondary"
-                    className="bg-secondary text-muted-foreground ring-background hover:bg-secondary hover:text-foreground flex size-8 items-center justify-center rounded-full text-[0.75rem] ring-2"
+                    className="bg-secondary text-muted-foreground ring-secondary hover:bg-secondary hover:text-foreground flex size-8 items-center justify-center rounded-full text-[0.75rem] ring-2"
                     size="icon"
                 >
                     +{extraCount}

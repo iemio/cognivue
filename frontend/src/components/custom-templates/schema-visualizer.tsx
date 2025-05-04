@@ -21,7 +21,7 @@ import {
 } from "@remixicon/react";
 import { Button } from "@/components/ui/button";
 import TableNode from "@/components/nodes/table-node";
-import SchemaEdge from "@/components/schema-edge";
+import SchemaEdge from "@/components/edges/schema-edge";
 import { initialNodes, initialEdges } from "@/lib/schema-data";
 import { useTheme } from "next-themes";
 

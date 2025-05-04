@@ -58,7 +58,7 @@ export default function Notifications() {
                     </kbd>
                 </TooltipContent>
             </Tooltip>
-            <PopoverContent className="w-72 mt-1 mr-2">
+            <PopoverContent className="w-72 mt-1 mr-0">
                 <div className="flex flex-col gap-3 text-center">
                     <div className="text-sm font-medium">Share file</div>
                     <div className="flex flex-wrap justify-center gap-2">

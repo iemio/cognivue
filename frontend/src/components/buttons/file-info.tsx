@@ -31,8 +31,9 @@ export default function FileInfo() {
                     </kbd>
                 </TooltipContent>
             </Tooltip>
-            <PopoverContent className="w-72 mt-1 mr-2">
-                name of file and other stuffs
+            <PopoverContent className="w-72 mt-1 mr-4">
+                name of file and created time/date, author, conributors,
+                viewers, lastedit
             </PopoverContent>
         </Popover>
     );

@@ -15,6 +15,7 @@ import {
     DropdownMenuContent,
     // DropdownMenuRadioGroup,
     DropdownMenuItem,
+    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -27,7 +28,6 @@ const nodes = [
 
 export default function TemplateSwitcher() {
     const [activeTemplate, setActiveTemplate] = useState(nodes[0] ?? null);
-
     return (
         <Breadcrumb>
             <BreadcrumbList>
@@ -62,5 +62,6 @@ export default function TemplateSwitcher() {
                 </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>
+        // </div>
     );
 }

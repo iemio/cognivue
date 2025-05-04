@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
-import Header from "@/components/header";
-import SchemaVisualizer from "@/components/schema-visualizer";
 export const metadata: Metadata = {
     title: "Cognivue",
 };
 
 export default function Page() {
-    return (
-        <div className="min-h-svh flex flex-col">
-            <Header />
-            <SchemaVisualizer />
-        </div>
-    );
+    return <div className="min-h-svh flex flex-col"></div>;
 }
