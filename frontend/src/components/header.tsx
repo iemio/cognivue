@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 // import ThemeToggle from "@/components/theme-toggle";
 import ShareButton from "./buttons/share";
 import Notifications from "./buttons/notifications";
-import Logo from "./icons/logo";
+import LogoIcon from "./icons/logo";
 import FileInfo from "./buttons/file-info";
 import ActionCenter from "./action-center";
 
@@ -17,7 +17,7 @@ export default function Header() {
                 {/* Left area */}
                 <div className="flex-1 flex items-center gap-2">
                     <Link className="inline-flex" href="/">
-                        <Logo />
+                        <LogoIcon />
                     </Link>
                     <ActionCenter />
                 </div>

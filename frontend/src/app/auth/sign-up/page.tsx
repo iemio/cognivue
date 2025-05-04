@@ -1,4 +1,4 @@
-import GridAuth from "@/components/forms/auth-form";
+import GridAuth from "@/components/forms/auth";
 
 const Page = () => {
     return <GridAuth />;

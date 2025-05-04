@@ -1,7 +1,7 @@
-import GridAuth from "@/components/forms/auth-form";
+import AuthPage from "@/components/forms/auth";
 
 const Page = () => {
-    return <GridAuth />;
+    return <AuthPage login={true} />;
 };
 
 export default Page;

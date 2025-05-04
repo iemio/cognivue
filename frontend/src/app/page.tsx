@@ -1,8 +1,12 @@
-import type { Metadata } from "next";
-export const metadata: Metadata = {
-    title: "Cognivue",
-};
+"use client";
+import FooterSection from "@/components/footer";
+import { HeroSection } from "@/components/hero-section";
 
 export default function Page() {
-    return <div className="min-h-svh flex flex-col"></div>;
+    return (
+        <div>
+            <HeroSection />
+            <FooterSection />
+        </div>
+    );
 }
