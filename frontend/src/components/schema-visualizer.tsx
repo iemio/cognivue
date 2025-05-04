@@ -47,6 +47,7 @@ function SchemaVisualizerInner() {
     }, [fitView]);
 
     const { theme, setTheme } = useTheme();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [system, setSystem] = useState(false);
 
     const smartToggle = () => {
