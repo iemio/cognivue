@@ -1,14 +1,8 @@
 import { ModeToggle } from "@/components/ui/mode-toggle";
-import {
-    Footer,
-    FooterColumn,
-    FooterBottom,
-    FooterContent,
-} from "@/components/ui/footer";
+import { Footer, FooterBottom } from "@/components/ui/footer";
 import { siteConfig } from "@/config/site";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import LogoIcon from "./icons/logo";
 
 interface FooterLink {
     text: string;
