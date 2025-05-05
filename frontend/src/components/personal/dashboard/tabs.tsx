@@ -24,37 +24,31 @@ function TabsComponent() {
             checked: true,
             time: "12 hrs",
         },
-        {
-            id: "4",
-            text: "Get dog food",
-            checked: false,
-            time: "1 hrs",
-        },
     ]);
     const { handleCheck, removeElement } = useTodoHandlers(setTodos);
     return (
         <Tabs defaultValue="tab-1">
-            <TabsList className="h-auto rounded-none border-b border-border bg-transparent p-0">
+            <TabsList className="h-auto rounded-none border-b border-border bg-transparent p-0 mt-2">
                 <TabsTrigger
                     value="tab-1"
-                    className="relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
+                    className="cursor-pointer relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
                 >
                     All
                 </TabsTrigger>
                 <TabsTrigger
                     value="tab-2"
-                    className="relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
+                    className="cursor-pointer relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
                 >
                     Vues
                 </TabsTrigger>
                 <TabsTrigger
                     value="tab-3"
-                    className="relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
+                    className="cursor-pointer relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
                 >
                     Folders
                 </TabsTrigger>
             </TabsList>
-            <TabsContent value="tab-1" className="mt-5">
+            <TabsContent value="tab-1" className="mt-7">
                 <Todos
                     todos={todos}
                     handleCheck={handleCheck}
