@@ -43,7 +43,7 @@ export const AchievementCard = ({
                 />
                 <CardItem
                     translateZ="40"
-                    className="text-xl font-bold text-neutral-600 dark:text-white mt-8"
+                    className="text-xl font-bold text-neutral-600 dark:text-white mt-4"
                 >
                     <Logo />
                 </CardItem>
