@@ -18,7 +18,7 @@ type AuthProps = {
 const AuthPage: React.FC<AuthProps> = ({ login }) => {
     const router = useRouter();
     return (
-        <div className="bg-white dark:bg-zinc-950 py-16 text-zinc-800 dark:text-zinc-200 selection:bg-zinc-300 dark:selection:bg-zinc-600">
+        <div className="bg-white dark:bg-zinc-950 py-12 text-zinc-800 dark:text-zinc-200 selection:bg-zinc-300 dark:selection:bg-zinc-600">
             <DotPattern
                 width={20}
                 height={20}
@@ -29,13 +29,13 @@ const AuthPage: React.FC<AuthProps> = ({ login }) => {
                     "[mask-image:linear-gradient(to_bottom_left,white,transparent,transparent)] "
                 )}
             />
-            <div className="relative z-10 mx-auto w-full max-w-xl p-4">
+            <div className="relative z-10 mx-auto w-full max-w-xl p-4 md:p-10">
                 <BackButton onClick={() => router.back()} />
                 <motion.div
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.25, ease: "easeInOut" }}
-                    className="mt-10"
+                    className="mt-16"
                 >
                     <Logo />
                     <Header login={login} />
@@ -58,7 +58,7 @@ const BackButton: React.FC<{ onClick?: () => void }> = ({ onClick }) => (
 const Logo: React.FC = () => (
     <div className="mb-6 flex justify-center items-center">
         <LogoIcon />
-        <span className="ml-2 text-xl font-bold">Cognivue</span>
+        {/* <span className="ml-2 text-xl font-bold">Cognivue</span> */}
     </div>
 );
 
@@ -102,7 +102,7 @@ const SocialButton: React.FC<{
     px-4 py-2 font-semibold text-zinc-800 dark:text-zinc-200 transition-all duration-500
     before:absolute before:inset-0 before:-z-10 before:translate-x-[150%] before:translate-y-[150%] before:scale-[2.5]
     before:rounded-[100%] before:bg-zinc-800 dark:before:bg-zinc-200 before:transition-transform before:duration-1000 before:content-[""]
-    hover:scale-105 hover:text-zinc-100 dark:hover:text-zinc-900 hover:before:translate-x-[0%] hover:before:translate-y-[0%] active:scale-95
+    hover:scale-102 hover:text-zinc-100 dark:hover:text-zinc-900 hover:before:translate-x-[0%] hover:before:translate-y-[0%] active:scale-95
     ${fullWidth ? "col-span-2" : ""}`}
     >
         {icon}

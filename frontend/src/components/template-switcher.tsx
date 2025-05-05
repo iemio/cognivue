@@ -39,7 +39,7 @@ export default function TemplateSwitcher() {
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="flex items-center gap-1 font-medium text-foreground">
+                        <DropdownMenuTrigger className="flex items-center gap-1 font-medium text-foreground cursor-pointer">
                             {activeTemplate?.name ?? "Select Template"}
                             <ChevronDownIcon
                                 className="-me-1 opacity-60"
@@ -52,6 +52,7 @@ export default function TemplateSwitcher() {
                                 <DropdownMenuItem
                                     key={template.name}
                                     onClick={() => setActiveTemplate(template)}
+                                    className="cursor-pointer"
                                 >
                                     {template.name}
                                 </DropdownMenuItem>

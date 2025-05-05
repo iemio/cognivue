@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRightIcon, CheckIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
+import NumberFlow from "@number-flow/react";
 
 interface Feature {
     name: string;
@@ -146,10 +147,28 @@ function PricingSection({ tiers, className }: PricingSectionProps) {
                                 <div className="mb-6">
                                     <div className="flex items-baseline gap-2">
                                         <span className="text-4xl font-bold text-zinc-900 dark:text-zinc-100">
-                                            $
+                                            {/* $
                                             {isYearly
                                                 ? tier.price.yearly
-                                                : tier.price.monthly}
+                                                : tier.price.monthly} */}
+                                            <NumberFlow
+                                                value={
+                                                    isYearly
+                                                        ? tier.price.yearly
+                                                        : tier.price.monthly
+                                                }
+                                                format={{
+                                                    style: "currency",
+                                                    currency: "USD",
+                                                    minimumFractionDigits: 0,
+                                                    maximumFractionDigits: 0,
+                                                }}
+                                                transformTiming={{
+                                                    duration: 500,
+                                                    easing: "ease-out",
+                                                }}
+                                                willChange
+                                            />
                                         </span>
                                         <span className="text-sm text-zinc-500 dark:text-zinc-400">
                                             /{isYearly ? "year" : "month"}

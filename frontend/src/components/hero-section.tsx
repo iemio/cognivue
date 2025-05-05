@@ -40,7 +40,7 @@ export function HeroSection() {
                     <div className="h-[80rem] -translate-y-[350px] absolute left-0 top-0 w-56 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
                 </div>
                 <section>
-                    <div className="relative pt-24 md:pt-36">
+                    <div className="relative pt-30 md:pt-36">
                         <AnimatedGroup
                             variants={{
                                 container: {
@@ -87,7 +87,7 @@ export function HeroSection() {
                                         href="#link"
                                         className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
                                     >
-                                        <span className="text-foreground text-sm">
+                                        <span className="text-foreground md:text-sm text-xs">
                                             Introducing Support for Agentic
                                             workflow
                                         </span>
@@ -105,10 +105,21 @@ export function HeroSection() {
                                         </div>
                                     </Link>
 
-                                    <h1 className="mt-8 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
-                                        Modern Solutions for Flow management
+                                    {/* <h1 className="font-geist mt-8 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]"> */}
+                                    <h1
+                                        className="max-w-4xl mt-8 lg:mt-16 text-5xl md:text-7xl tracking-tighter font-geist
+    bg-clip-text text-transparent
+    bg-gradient-to-b from-zinc-900 to-zinc-100
+    dark:bg-gradient-to-b dark:from-zinc-100 dark:to-zinc-400
+    mx-auto"
+                                    >
+                                        {/* <h1 className="max-w-4xl mt-8 lg:mt-16 text-5xl md:text-7xl tracking-tighter font-geist dark:bg-clip-text dark:bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] text-transparent mx-auto"> */}
+                                        Modern Solutions for{" "}
+                                        <span className="text-transparent bg-clip-text bg-gradient-to-r dark:from-purple-300 dark:to-orange-200 from-purple-500 to-orange-400">
+                                            Flow management
+                                        </span>
                                     </h1>
-                                    <p className="mx-auto mt-8 max-w-2xl text-balance text-lg">
+                                    <p className="mx-auto mt-8 max-w-2xl text-balance text-md dark:text-gray-300 md:text-lg text-gray-700">
                                         Highly customizable components for
                                         building modern workflows and
                                         visualizations that look and feel the
@@ -334,9 +345,9 @@ const HeroHeader = () => {
 
 const Logo = ({ className }: { className?: string }) => {
     return (
-        <div className={cn("flex flex-row gap-2 items-center", className)}>
+        <div className={cn("flex flex-row items-center", className)}>
             <LogoIcon />
-            Cognivue
+            <pre className="uppercase font-bold"> Cognivue</pre>
         </div>
     );
 };

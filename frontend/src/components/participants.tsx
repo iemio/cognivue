@@ -44,7 +44,7 @@ export default function Participants() {
     const extraCount = DEFAULT_AVATARS.length - maxVisible;
     return (
         <TooltipProvider delayDuration={300}>
-            <div className="bg-transparent flex items-center justify-center rounded-full border p-1">
+            <div className="bg-transparent flex items-center justify-center rounded-full border pl-1 pt-0.25 pb-0.25 pr-1">
                 <div className="flex items-center relative">
                     {visibleParticipants.map((avatar, index) => (
                         <Tooltip key={index}>

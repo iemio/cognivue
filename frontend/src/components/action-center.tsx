@@ -28,7 +28,7 @@ const ActionCenter = () => {
                 <Button
                     size="icon"
                     variant="ghost"
-                    className="rounded-full shadow-none"
+                    className="cursor-pointer rounded-full shadow-none"
                     aria-label="Open edit menu"
                 >
                     <EllipsisIcon size={16} aria-hidden="true" />
@@ -39,16 +39,19 @@ const ActionCenter = () => {
                     const isDefault = action.default ?? false;
                     const nextAction = actions[index + 1];
 
-                    if (nextAction && !nextAction.default && isDefault) {
-                        console.log(
-                            "Next action exists and is not default:",
-                            nextAction
-                        );
-                    }
+                    // if (nextAction && !nextAction.default && isDefault) {
+                    //     console.log(
+                    //         "Next action exists and is not default:",
+                    //         nextAction
+                    //     );
+                    // }
 
                     return (
                         <div key={action.name}>
-                            <DropdownMenuItem onClick={() => {}}>
+                            <DropdownMenuItem
+                                onClick={() => {}}
+                                className="cursor-pointer"
+                            >
                                 {action.name}
                             </DropdownMenuItem>
                             {nextAction && nextAction.default && !isDefault && (

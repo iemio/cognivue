@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-const SignInForm: React.FC = () => {
+const SignUpForm: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => e.preventDefault();
 
     return (
@@ -80,7 +80,7 @@ const SignInForm: React.FC = () => {
                 />
             </div> */}
             <Button type="submit" className="w-full">
-                Sign in
+                Sign up
             </Button>
         </form>
     );
@@ -90,15 +90,52 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, className, ...props }) => (
-    <button
-        className={`rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50
-    ring-2 ring-blue-500/50 ring-offset-2 ring-offset-white dark:ring-offset-zinc-950
-    transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70 ${className}`}
-        {...props}
-    >
-        {children}
-    </button>
-);
+// const Button: React.FC<ButtonProps> = ({ children, className, ...props }) => (
+//     <button
+//         className={`cursor-pointer rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50
+//     ring-2 hover:ring-blue-500/50 ring-offset-2 ring-offset-white dark:ring-offset-zinc-950
+//     transition-all hover:scale-[0.98] ring-transparent active:scale-[0.98] active:ring-blue-500/70 ${className}`}
+//         {...props}
+//     >
+//         {children}
+//     </button>
+// );
 
-export default SignInForm;
+const Button: React.FC<ButtonProps> = ({
+    children,
+    className = "",
+    ...props
+}) => {
+    const [loading, setLoading] = useState(false);
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 5000);
+
+        // Call the user's onClick handler
+        props.onClick?.(e);
+    };
+
+    return (
+        <button
+            onClick={handleClick}
+            disabled={loading}
+            className={`rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50
+        ring-2 ring-offset-2 ring-transparent ring-offset-white dark:ring-offset-zinc-950 transition-all duration-200
+        ${
+            loading
+                ? "ring-blue-500/50 cursor-not-allowed opacity-80"
+                : "hover:scale-[0.98] hover:ring-blue-500/50 cursor-pointer"
+        }
+        active:scale-[0.98] active:ring-blue-500/70
+        ${className}`}
+            {...props}
+        >
+            {loading ? "Signing up..." : children}
+        </button>
+    );
+};
+
+export default SignUpForm;
