@@ -4,7 +4,7 @@ import { ArrowRight, Github, AlignLeft as Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedGroup } from "@/components/ui/animated-group";
 import { cn } from "@/lib/utils";
-import LogoIcon from "./icons/logo";
+import LogoIcon from "../icons/logo";
 
 const transitionVariants = {
     item: {
