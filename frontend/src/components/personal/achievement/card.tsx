@@ -41,21 +41,14 @@ export const AchievementCard = ({
                         [34, 139, 34], // Forest green
                     ]}
                 />
-                <CardItem
-                    translateZ="40"
-                    className="text-xl font-bold text-neutral-600 dark:text-white mt-4"
-                >
+                <CardItem className="text-xl font-bold text-neutral-600 dark:text-white mt-4">
                     <Logo />
                 </CardItem>
-                <CardItem
-                    translateZ="50"
-                    className="text-xl font-bold  text-zinc-100 font-mono"
-                >
+                <CardItem className="text-xl font-bold  text-zinc-100 font-mono">
                     {title}
                 </CardItem>
                 <CardItem
                     as="p"
-                    translateZ="60"
                     className="text-sm max-w-sm mt-2 text-zinc-300"
                 >
                     {description}
@@ -72,7 +65,6 @@ export const AchievementCard = ({
                         Try now →
                     </CardItem> */}
                     <CardItem
-                        translateZ={20}
                         as="button"
                         className={cn(
                             "px-4 py-2 rounded-xl text-black text-xs font-bold",

@@ -2,13 +2,7 @@
 
 import { cn } from "@/lib/utils";
 
-import React, {
-    createContext,
-    useState,
-    useContext,
-    useRef,
-    useEffect,
-} from "react";
+import React, { createContext, useState, useContext, useRef } from "react";
 
 const MouseEnterContext = createContext<
     [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
@@ -101,7 +95,7 @@ export const CardItem = ({
     className,
     ...rest
 }: {
-    as?: "div" | "button";
+    as?: "div" | "button" | "p";
     children: React.ReactNode;
     className?: string;
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
