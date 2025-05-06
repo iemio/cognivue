@@ -11,7 +11,7 @@ const Form: React.FC<FormProps> = ({ setTodos }) => {
     const [visible, setVisible] = useState<boolean>(false);
     const [time, setTime] = useState<number>(15);
     const [text, setText] = useState<string>("");
-    const [unit, setUnit] = useState<"mins" | "hrs">("mins");
+    const [fileType, setFileType] = useState<"blank" | "template">("blank");
 
     const handleSubmit = (): void => {
         if (!text.length) {
@@ -23,14 +23,14 @@ const Form: React.FC<FormProps> = ({ setTodos }) => {
                 id: Math.random().toString(),
                 text,
                 checked: false,
-                time: `${time} ${unit}`,
+                time: `${time} ${"min"}`,
             },
             ...pv,
         ]);
 
         setTime(15);
         setText("");
-        setUnit("mins");
+        setFileType("blank");
     };
 
     return (
@@ -51,44 +51,36 @@ const Form: React.FC<FormProps> = ({ setTodos }) => {
                             value={text}
                             onChange={(e) => setText(e.target.value)}
                             placeholder="Name of file"
-                            className="h-24 w-full resize-none rounded bg-zinc-900 p-3 text-sm text-zinc-50 placeholder-zinc-500 caret-zinc-50 focus:outline-0"
+                            className="h-10 w-full resize-none rounded bg-zinc-900 p-1 text-sm text-zinc-50 placeholder-zinc-500 caret-zinc-50 focus:outline-0 mb-10"
                         />
 
                         <div className="flex items-center justify-between">
-                            {/* <div className="flex items-center gap-1.5">
-                                <input
-                                    type="number"
-                                    className="w-24 rounded bg-zinc-700 px-1.5 py-1 text-sm text-zinc-50 focus:outline-0"
-                                    value={time}
-                                    onChange={(e) =>
-                                        setTime(parseInt(e.target.value))
-                                    }
-                                />
+                            <div className="flex items-center gap-1.5">
                                 <button
                                     type="button"
-                                    onClick={() => setUnit("mins")}
-                                    className={`rounded px-1.5 py-1 text-xs ${
-                                        unit === "mins"
+                                    onClick={() => setFileType("blank")}
+                                    className={`rounded px-1.5 py-1 text-xs cursor-pointer ${
+                                        fileType === "blank"
                                             ? "bg-white text-zinc-950"
                                             : "bg-zinc-300/20 text-zinc-300 transition-colors hover:bg-zinc-600 hover:text-zinc-200"
                                     }`}
                                 >
-                                    mins
+                                    Blank
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => setUnit("hrs")}
-                                    className={`rounded px-1.5 py-1 text-xs ${
-                                        unit === "hrs"
+                                    onClick={() => setFileType("template")}
+                                    className={`rounded px-1.5 py-1 text-xs cursor-pointer ${
+                                        fileType === "template"
                                             ? "bg-white text-zinc-950"
                                             : "bg-zinc-300/20 text-zinc-300 transition-colors hover:bg-zinc-600 hover:text-zinc-200"
                                     }`}
                                 >
-                                    hrs
+                                    Template
                                 </button>
-                            </div> */}
+                            </div>
 
-                            <div>Select template</div>
+                            {/* <div>Select template</div> */}
                             <button
                                 type="submit"
                                 className="rounded bg-indigo-600 px-1.5 py-1 text-xs text-indigo-50 transition-colors hover:bg-indigo-500 cursor-pointer"

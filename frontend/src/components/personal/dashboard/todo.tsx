@@ -10,6 +10,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { CgLink, CgRename, CgDuplicate, CgShare } from "react-icons/cg";
 
 // Define the Todo item type
 interface TodoItem {
@@ -104,7 +105,7 @@ const Todo: React.FC<TodoProps> = ({
                     }}
                     className="size-4 accent-indigo-400"
                 />
-                <Link href="/file" onClick={(e) => e.stopPropagation()}>
+                <Link href={`/file/${id}`} onClick={(e) => e.stopPropagation()}>
                     <p
                         className={`text-white transition-colors ${
                             isSelected && "text-zinc-400"
@@ -147,6 +148,7 @@ const Todo: React.FC<TodoProps> = ({
                             }}
                             className="cursor-pointer"
                         >
+                            <CgLink />
                             Copy link
                         </DropdownMenuItem>
                         <DropdownMenuItem
@@ -155,7 +157,26 @@ const Todo: React.FC<TodoProps> = ({
                             }}
                             className="cursor-pointer"
                         >
+                            <CgDuplicate />
                             Duplicate
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={(e) => {
+                                e.stopPropagation();
+                            }}
+                            className="cursor-pointer"
+                        >
+                            <CgRename />
+                            Rename
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={(e) => {
+                                e.stopPropagation();
+                            }}
+                            className="cursor-pointer"
+                        >
+                            <CgShare />
+                            Share
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
