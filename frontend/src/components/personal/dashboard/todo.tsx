@@ -1,44 +1,54 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion, useAnimate, usePresence } from "motion/react";
-import { FiClock, FiTrash2 } from "react-icons/fi";
+import { FiClock, FiMoreHorizontal } from "react-icons/fi";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { User } from "lucide-react";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 // Define the Todo item type
 interface TodoItem {
     id: string;
     text: string;
-    checked: boolean;
     time: string;
 }
 
 // Define props for the Todos component
 interface TodosProps {
     todos: TodoItem[];
-    handleCheck: (id: string) => void;
-    removeElement: (id: string) => void;
+    selectedTodos: string[];
+    toggleSelection: (id: string) => void;
 }
 
 // Define props for the Todo component
 interface TodoProps {
-    removeElement: (id: string) => void;
-    handleCheck: (id: string) => void;
     id: string;
     children: React.ReactNode;
-    checked: boolean;
     time: string;
+    isSelected: boolean;
+    toggleSelection: (id: string) => void;
 }
 
-const Todos: React.FC<TodosProps> = ({ todos, handleCheck, removeElement }) => {
+const Todos: React.FC<TodosProps> = ({
+    todos,
+    selectedTodos,
+    toggleSelection,
+}) => {
     return (
         <div className="w-full space-y-3">
             <AnimatePresence>
                 {todos.map((t) => (
                     <Todo
-                        handleCheck={handleCheck}
-                        removeElement={removeElement}
                         id={t.id}
                         key={t.id}
-                        checked={t.checked}
                         time={t.time}
+                        isSelected={selectedTodos.includes(t.id)}
+                        toggleSelection={toggleSelection}
                     >
                         {t.text}
                     </Todo>
@@ -49,12 +59,11 @@ const Todos: React.FC<TodosProps> = ({ todos, handleCheck, removeElement }) => {
 };
 
 const Todo: React.FC<TodoProps> = ({
-    removeElement,
-    handleCheck,
     id,
     children,
-    checked,
     time,
+    isSelected,
+    toggleSelection,
 }) => {
     const [isPresent, safeToRemove] = usePresence();
     const [scope, animate] = useAnimate();
@@ -62,87 +71,123 @@ const Todo: React.FC<TodoProps> = ({
     useEffect(() => {
         if (!isPresent) {
             const exitAnimation = async (): Promise<void> => {
-                animate(
-                    "p",
-                    { color: checked ? "#6ee7b7" : "#fca5a5" },
-                    { ease: "easeIn", duration: 0.125 }
-                );
-
                 await animate(
                     scope.current,
                     { scale: 1.025 },
                     { ease: "easeIn", duration: 0.125 }
                 );
-
-                await animate(
-                    scope.current,
-                    { opacity: 0, x: checked ? 24 : -24 },
-                    { delay: 0.75 }
-                );
-
                 safeToRemove();
             };
 
             exitAnimation();
         }
-    }, [isPresent, animate, checked, safeToRemove, scope]);
+    }, [isPresent, animate, safeToRemove, scope]);
 
     return (
         <motion.div
             ref={scope}
             layout
-            className="relative flex w-full items-center gap-3 rounded border border-zinc-700 bg-zinc-900 p-3"
+            className={`relative flex w-full items-center gap-3 rounded border ${
+                isSelected
+                    ? "border-indigo-500 bg-indigo-900/20"
+                    : "border-zinc-700 bg-zinc-900"
+            } p-3`}
         >
-            <input
-                type="checkbox"
-                checked={checked}
-                onChange={() => handleCheck(id)}
-                className="size-4 accent-indigo-400"
-            />
-            <p
-                className={`text-white transition-colors ${
-                    checked && "text-zinc-400"
-                }`}
-            >
-                {children}
-            </p>
+            <div className="flex items-center gap-3">
+                <input
+                    type="checkbox"
+                    checked={isSelected}
+                    onChange={(e) => {
+                        e.stopPropagation();
+                        // isSelected: !isSelected;
+                        toggleSelection(id);
+                    }}
+                    className="size-4 accent-indigo-400"
+                />
+                <Link href="/file" onClick={(e) => e.stopPropagation()}>
+                    <p
+                        className={`text-white transition-colors ${
+                            isSelected && "text-zinc-400"
+                        }`}
+                    >
+                        {children}
+                    </p>
+                </Link>
+            </div>
             <div className="ml-auto flex gap-1.5">
                 <div className="flex items-center gap-1.5 whitespace-nowrap rounded bg-zinc-800 px-1.5 py-1 text-xs text-zinc-400">
                     <FiClock />
-                    <span>{time}</span>
+                    <span>{time} ago</span>
                 </div>
-                <button
-                    onClick={() => removeElement(id)}
-                    className="rounded bg-red-300/20 px-1.5 py-1 text-xs text-red-300 transition-colors hover:bg-red-600 hover:text-red-200"
-                >
-                    <FiTrash2 />
-                </button>
+                <Avatar className="h-6 w-6">
+                    <AvatarFallback>
+                        <User
+                            size={10}
+                            className="opacity-60"
+                            aria-hidden="true"
+                        />
+                    </AvatarFallback>
+                </Avatar>
+
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                            }}
+                            className="cursor-pointer rounded bg-neutral-300/20 px-1.5 py-1 text-xs text-neutral-300 transition-colors hover:bg-neutral-600 hover:text-neutral-200"
+                        >
+                            <FiMoreHorizontal />
+                        </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start">
+                        <DropdownMenuItem
+                            onClick={(e) => {
+                                e.stopPropagation();
+                            }}
+                            className="cursor-pointer"
+                        >
+                            Copy link
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={(e) => {
+                                e.stopPropagation();
+                            }}
+                            className="cursor-pointer"
+                        >
+                            Duplicate
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
+            {/*small dot*/}
+            {isSelected && (
+                <div className="absolute right-0 top-0 h-3 w-3 translate-x-1/3 -translate-y-1/3 rounded-full bg-indigo-500" />
+            )}
         </motion.div>
     );
 };
 
 // Handler functions to update todos
 interface TodoHandlers {
-    handleCheck: (id: string) => void;
-    removeElement: (id: string) => void;
+    toggleSelection: (id: string) => void;
+    deleteSelected: (selectedIds: string[]) => void;
 }
 
 // Example implementation of the handler functions
 const useTodoHandlers = (
     setTodos: React.Dispatch<React.SetStateAction<TodoItem[]>>
 ): TodoHandlers => {
-    const handleCheck = (id: string): void => {
-        setTodos((pv) =>
-            pv.map((t) => (t.id === id ? { ...t, checked: !t.checked } : t))
-        );
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const toggleSelection = (id: string): void => {
+        // This will be implemented in the parent component
     };
 
-    const removeElement = (id: string): void => {
-        setTodos((pv) => pv.filter((t) => t.id !== id));
+    const deleteSelected = (selectedIds: string[]): void => {
+        setTodos((pv) => pv.filter((t) => !selectedIds.includes(t.id)));
     };
 
-    return { handleCheck, removeElement };
+    return { toggleSelection, deleteSelected };
 };
 
 export { Todos, Todo, useTodoHandlers, type TodoItem, type TodoHandlers };

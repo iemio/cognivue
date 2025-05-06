@@ -47,14 +47,15 @@ const Form: React.FC<FormProps> = ({ setTodos }) => {
                         }}
                         className="mb-6 w-full rounded border border-zinc-700 bg-zinc-900 p-3"
                     >
-                        <textarea
+                        <input
                             value={text}
                             onChange={(e) => setText(e.target.value)}
-                            placeholder="What do you need to do?"
+                            placeholder="Name of file"
                             className="h-24 w-full resize-none rounded bg-zinc-900 p-3 text-sm text-zinc-50 placeholder-zinc-500 caret-zinc-50 focus:outline-0"
                         />
+
                         <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-1.5">
+                            {/* <div className="flex items-center gap-1.5">
                                 <input
                                     type="number"
                                     className="w-24 rounded bg-zinc-700 px-1.5 py-1 text-sm text-zinc-50 focus:outline-0"
@@ -85,7 +86,9 @@ const Form: React.FC<FormProps> = ({ setTodos }) => {
                                 >
                                     hrs
                                 </button>
-                            </div>
+                            </div> */}
+
+                            <div>Select template</div>
                             <button
                                 type="submit"
                                 className="rounded bg-indigo-600 px-1.5 py-1 text-xs text-indigo-50 transition-colors hover:bg-indigo-500 cursor-pointer"
