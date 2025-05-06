@@ -68,7 +68,7 @@ const Todo: React.FC<TodoProps> = ({
 }) => {
     const [isPresent, safeToRemove] = usePresence();
     const [scope, animate] = useAnimate();
-
+    // const isTemplate = true;
     useEffect(() => {
         if (!isPresent) {
             const exitAnimation = async (): Promise<void> => {
@@ -107,9 +107,9 @@ const Todo: React.FC<TodoProps> = ({
                 />
                 <Link href={`/file/${id}`} onClick={(e) => e.stopPropagation()}>
                     <p
-                        className={`text-white transition-colors ${
+                        className={` transition-colors ${
                             isSelected && "text-zinc-400"
-                        }`}
+                        } `}
                     >
                         {children}
                     </p>

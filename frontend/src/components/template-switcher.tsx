@@ -27,6 +27,7 @@ const nodes = [
 
 export default function TemplateSwitcher() {
     const [activeTemplate, setActiveTemplate] = useState(nodes[0] ?? null);
+    const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
     return (
         <Breadcrumb>
             <BreadcrumbList>
@@ -38,11 +39,13 @@ export default function TemplateSwitcher() {
                     /{" "}
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                    <DropdownMenu>
+                    <DropdownMenu onOpenChange={setDropdownOpen}>
                         <DropdownMenuTrigger className="flex items-center gap-1 font-medium text-foreground cursor-pointer">
                             {activeTemplate?.name ?? "Select Template"}
                             <ChevronDownIcon
-                                className="-me-1 opacity-60"
+                                className={`-me-1 opacity-60 ${
+                                    dropdownOpen && "rotate-180"
+                                }`}
                                 size={16}
                                 aria-hidden="true"
                             />
