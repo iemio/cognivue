@@ -21,6 +21,9 @@ export function AnimatedModalDemo() {
         console.log(file);
     };
     const [loading, setLoading] = useState(false);
+    const handleModalClose = () => {
+        setFile(null);
+    };
     return (
         <div>
             <Loader
@@ -43,7 +46,7 @@ export function AnimatedModalDemo() {
                 {/* <CreateButton /> */}
                 {/* </div> */}
             </ModalTrigger>
-            <ModalBody>
+            <ModalBody onClose={handleModalClose}>
                 <ModalContent>
                     <div className="w-full max-w-4xl mx-auto min-h-96 border border-dashed bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-lg">
                         <FileUpload onChange={handleFileUpload} />
@@ -52,12 +55,21 @@ export function AnimatedModalDemo() {
                 <ModalFooter className="gap-4">
                     <button
                         className="px-2 py-1 bg-gray-200 text-black dark:bg-black dark:border-black dark:text-white border border-gray-300 rounded-md text-sm w-28 cursor-pointer"
-                        onClick={() => setOpen(false)}
+                        onClick={() => {
+                            handleModalClose();
+                            setOpen(false);
+                        }}
                     >
                         Cancel
                     </button>
-                    <button
+                    {/* <button
+                        disabled={!file}
                         className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28 cursor-pointer"
+                        onClick={() => setLoading(true)}
+                    > */}
+                    <button
+                        disabled={!file}
+                        className="bg-gray-900 text-gray-300 dark:bg-gray-100 dark:text-gray-800 text-sm px-2 py-1 rounded-md border border-gray-900 w-28 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-700 disabled:text-gray-400 disabled:border-gray-600 dark:disabled:bg-gray-300 dark:disabled:text-gray-600 dark:disabled:border-gray-400"
                         onClick={() => setLoading(true)}
                     >
                         Configure
@@ -73,25 +85,13 @@ import { MultiStepLoader as Loader } from "./multi-step-loader";
 
 const loadingStates = [
     {
-        text: "Buying a condo",
+        text: "Checking file type",
     },
     {
         text: "Travelling in a flight",
     },
     {
         text: "Meeting Tyler Durden",
-    },
-    {
-        text: "He makes soap",
-    },
-    {
-        text: "We goto a bar",
-    },
-    {
-        text: "Start a fight",
-    },
-    {
-        text: "We like it",
     },
     {
         text: "Welcome to F**** C***",

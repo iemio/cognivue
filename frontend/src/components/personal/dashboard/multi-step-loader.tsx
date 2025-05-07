@@ -1,9 +1,25 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
-const CheckIcon = ({ className }: { className?: string }) => {
+// const CheckIcon = ({ className }: { className?: string }) => {
+//     return (
+//         <svg
+//             xmlns="http://www.w3.org/2000/svg"
+//             fill="none"
+//             viewBox="0 0 24 24"
+//             strokeWidth={1.5}
+//             stroke="currentColor"
+//             className={cn("w-6 h-6 ", className)}
+//         >
+//             <path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+//         </svg>
+//     );
+// };
+
+const EmptyCircleIcon = ({ className }: { className?: string }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -11,12 +27,14 @@ const CheckIcon = ({ className }: { className?: string }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className={cn("w-6 h-6 ", className)}
+            className={`w-6 h-6 ${className}`}
         >
-            <path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            <circle cx="12" cy="12" r="9" />
         </svg>
     );
 };
+
+export default EmptyCircleIcon;
 
 const CheckFilled = ({ className }: { className?: string }) => {
     return (
@@ -62,7 +80,7 @@ const LoaderCore = ({
                     >
                         <div>
                             {index > value && (
-                                <CheckIcon className="text-black dark:text-white" />
+                                <EmptyCircleIcon className="text-black dark:text-white" />
                             )}
                             {index <= value && (
                                 <CheckFilled
@@ -94,13 +112,14 @@ export const MultiStepLoader = ({
     loadingStates,
     loading,
     duration = 2000,
-    loop = true,
+    loop = false,
 }: {
     loadingStates: LoadingState[];
     loading?: boolean;
     duration?: number;
     loop?: boolean;
 }) => {
+    const router = useRouter();
     const [currentState, setCurrentState] = useState(0);
 
     useEffect(() => {
@@ -108,14 +127,29 @@ export const MultiStepLoader = ({
             setCurrentState(0);
             return;
         }
+        // const timeout = setTimeout(() => {
+        //     setCurrentState((prevState) =>
+        //         loop
+        //             ? prevState === loadingStates.length - 1
+        //                 ? 0
+        //                 : prevState + 1
+        //             : Math.min(prevState + 1, loadingStates.length - 1)
+        //     );
+        // }, duration);
         const timeout = setTimeout(() => {
-            setCurrentState((prevState) =>
-                loop
-                    ? prevState === loadingStates.length - 1
-                        ? 0
-                        : prevState + 1
-                    : Math.min(prevState + 1, loadingStates.length - 1)
-            );
+            if (loop) {
+                setCurrentState((prevState) =>
+                    prevState === loadingStates.length - 1 ? 0 : prevState + 1
+                );
+            } else {
+                if (currentState < loadingStates.length - 1) {
+                    setCurrentState(currentState + 1);
+                } else {
+                    // When we've reached the end of loading states and loop is false,
+                    // navigate to the specified location
+                    router.push("/file/2");
+                }
+            }
         }, duration);
 
         return () => clearTimeout(timeout);

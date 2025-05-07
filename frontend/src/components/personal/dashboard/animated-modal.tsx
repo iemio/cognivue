@@ -76,9 +76,11 @@ export const ModalTrigger = ({
 export const ModalBody = ({
     children,
     className,
+    onClose,
 }: {
     children: ReactNode;
     className?: string;
+    onClose?: () => void;
 }) => {
     const { open } = useModal();
 
@@ -92,7 +94,12 @@ export const ModalBody = ({
 
     const modalRef = useRef<HTMLDivElement>(null);
     const { setOpen } = useModal();
-    useOutsideClick(modalRef, () => setOpen(false));
+    useOutsideClick(modalRef, () => {
+        if (onClose) {
+            onClose();
+        }
+        setOpen(false);
+    });
 
     return (
         <AnimatePresence>
