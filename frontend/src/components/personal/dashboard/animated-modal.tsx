@@ -232,25 +232,56 @@ const CloseIcon = () => {
 
 // Hook to detect clicks outside of a component.
 // Add it in a separate file, I've added here for simplicity
+// export const useOutsideClick = (
+//     ref: React.RefObject<HTMLDivElement | null>,
+//     callback: Function
+// ) => {
+//     useEffect(() => {
+//         const listener = (event: any) => {
+//             // DO NOTHING if the element being clicked is the target element or their children
+//             if (!ref.current || ref.current.contains(event.target)) {
+//                 return;
+//             }
+//             callback(event);
+//         };
+
+//         document.addEventListener("mousedown", listener);
+//         document.addEventListener("touchstart", listener);
+
+//         return () => {
+//             document.removeEventListener("mousedown", listener);
+//             document.removeEventListener("touchstart", listener);
+//         };
+//     }, [ref, callback]);
+// };
+
 export const useOutsideClick = (
     ref: React.RefObject<HTMLDivElement | null>,
-    callback: Function
+    callback: (event: MouseEvent | TouchEvent) => void
 ) => {
     useEffect(() => {
-        const listener = (event: any) => {
+        const mouseListener = (event: MouseEvent) => {
             // DO NOTHING if the element being clicked is the target element or their children
-            if (!ref.current || ref.current.contains(event.target)) {
+            if (!ref.current || ref.current.contains(event.target as Node)) {
                 return;
             }
             callback(event);
         };
 
-        document.addEventListener("mousedown", listener);
-        document.addEventListener("touchstart", listener);
+        const touchListener = (event: TouchEvent) => {
+            // DO NOTHING if the element being touched is the target element or their children
+            if (!ref.current || ref.current.contains(event.target as Node)) {
+                return;
+            }
+            callback(event);
+        };
+
+        document.addEventListener("mousedown", mouseListener);
+        document.addEventListener("touchstart", touchListener);
 
         return () => {
-            document.removeEventListener("mousedown", listener);
-            document.removeEventListener("touchstart", listener);
+            document.removeEventListener("mousedown", mouseListener);
+            document.removeEventListener("touchstart", touchListener);
         };
     }, [ref, callback]);
 };

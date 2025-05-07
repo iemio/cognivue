@@ -236,7 +236,10 @@ export const FileUpload = ({
         // Take only the first file if multiple are provided
         const newFile = newFiles.length > 0 ? newFiles[0] : null;
         setFile(newFile);
-        onChange && onChange(newFile);
+        if (onChange) {
+            onChange(newFile);
+        }
+        // onChange && onChange(newFile);
     };
 
     const handleClick = () => {
@@ -254,7 +257,10 @@ export const FileUpload = ({
 
     const clearFile = () => {
         setFile(null);
-        onChange && onChange(null);
+        if (onChange) {
+            onChange(null);
+        }
+        // onChange && onChange(null);
         if (fileInputRef.current) {
             fileInputRef.current.value = "";
         }
