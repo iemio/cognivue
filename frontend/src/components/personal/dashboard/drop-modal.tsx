@@ -9,7 +9,6 @@ import {
 } from "./animated-modal";
 
 import { FileUpload } from "./package-upload";
-import { useRouter } from "next/navigation";
 import { IoCloseCircleOutline } from "react-icons/io5";
 export function AnimatedModalDemo() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
