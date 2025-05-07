@@ -9,7 +9,7 @@ import {
 } from "./animated-modal";
 
 import { FileUpload } from "./package-upload";
-import { IoCloseCircleOutline } from "react-icons/io5";
+import { IoCloseOutline } from "react-icons/io5";
 export function AnimatedModalDemo() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [file, setFile] = useState<File | null>(null);
@@ -22,19 +22,103 @@ export function AnimatedModalDemo() {
     const handleModalClose = () => {
         setFile(null);
     };
+
+    // Define processing times for each step (in milliseconds)
+    const processingTimes: { [key: number]: number } = {
+        0: 2000, // 2 seconds for first step
+        1: 5000, // 5 seconds for second step
+        2: 3000, // 3 seconds for third step
+        3: 1500, // 1.5 seconds for fourth step
+        5: 10000,
+    };
+
+    // Error simulation function with different timings for each step
+    const checkForErrors = async (
+        stateIndex: number
+    ): Promise<{ hasError: boolean; errorMessage?: string }> => {
+        // Return a promise to simulate async operations with different durations
+        return new Promise((resolve) => {
+            console.log(`Processing state ${stateIndex}...`);
+
+            // Get the processing time for this step (or default to 2000ms)
+            const processingTime = processingTimes[stateIndex] || 2000;
+
+            // Simulate different processing times and outcomes for each step
+            setTimeout(() => {
+                switch (stateIndex) {
+                    case 0:
+                        // First step passes after its processing time
+                        console.log(
+                            `Step ${stateIndex} completed successfully after ${processingTime}ms`
+                        );
+                        resolve({ hasError: false });
+                        break;
+                    case 5:
+                        // Second step fails after its processing time
+                        console.log(
+                            `Step ${stateIndex} failed after ${processingTime}ms`
+                        );
+                        resolve({
+                            hasError: true,
+                            // errorMessage: `Connection timeout after ${
+                            //     processingTime / 1000
+                            // } seconds`,
+                            errorMessage: `after ${
+                                processingTime / 1000
+                            } seconds`,
+                        });
+                        break;
+                    case 4:
+                        // Third step passes after its processing time
+                        console.log(
+                            `Step ${stateIndex} completed successfully after ${processingTime}ms`
+                        );
+                        resolve({ hasError: false });
+                        break;
+                    case 2:
+                        // Fourth step passes after its processing time
+                        console.log(
+                            `Step ${stateIndex} completed successfully after ${processingTime}ms`
+                        );
+                        resolve({ hasError: false });
+                        break;
+                    default:
+                        // Default behavior for any additional steps
+                        console.log(
+                            `Step ${stateIndex} completed with default handler after ${processingTime}ms`
+                        );
+                        resolve({ hasError: false });
+                }
+            }, processingTime); // Different delay for each step based on the processingTimes object
+        });
+    };
+
+    const handleComplete = () => {
+        console.log("All steps completed successfully!");
+        // You could do additional operations here
+    };
+
+    const handleError = (index: number, message: string) => {
+        console.error(`Error occurred at step ${index}: ${message}`);
+        // You could log errors or perform fallback operations here
+    };
+
     return (
         <div>
             <Loader
                 loadingStates={loadingStates}
                 loading={loading}
-                duration={2000}
+                duration={1000} // Time to show success state before moving to next step
+                checkStateForError={checkForErrors}
+                onError={handleError}
+                onComplete={handleComplete}
             />
             {loading && (
                 <button
                     className="fixed top-4 right-4 text-black dark:text-white z-[120]"
                     onClick={() => setLoading(false)}
                 >
-                    <IoCloseCircleOutline className="h-10 w-10 cursor-pointer" />
+                    <IoCloseOutline className="h-10 w-10 cursor-pointer" />
                     {/* <IconSquareRoundedX className="h-10 w-10" /> */}
                 </button>
             )}
@@ -86,13 +170,25 @@ const loadingStates = [
         text: "Checking file type",
     },
     {
-        text: "Travelling in a flight",
+        text: "Travelling in",
     },
     {
-        text: "Meeting Tyler Durden",
+        text: "Meeting Tyler ",
     },
     {
-        text: "Welcome to F**** C***",
+        text: "Welcome to F**** ",
+    },
+    {
+        text: "4",
+    },
+    {
+        text: "5",
+    },
+    {
+        text: "6",
+    },
+    {
+        text: "7",
     },
 ];
 
