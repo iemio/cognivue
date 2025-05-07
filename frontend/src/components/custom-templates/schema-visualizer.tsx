@@ -99,7 +99,7 @@ function SchemaVisualizerInner() {
                                 "transparent",
                         } as React.CSSProperties
                     }
-                    attributionPosition="bottom-left" // you should remove this line if you don't want to show the attribution
+                    // attributionPosition="bottom-left" // you should remove this line if you don't want to show the attribution
                 >
                     <Background
                         variant={BackgroundVariant.Dots}
