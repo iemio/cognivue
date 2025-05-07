@@ -10,14 +10,12 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({
     selectedCount,
     onDelete,
 }) => {
-    if (selectedCount === 0) {
-        return null;
-    }
+    if (!selectedCount) return null;
     return (
         <button
             onClick={onDelete}
             disabled={selectedCount === 0}
-            className={`rounded px-2.5 py-1.5 text-sm text-red-300 transition-colors flex flex-row gap-2 items-center cursor-pointer mb-4 float-right border
+            className={`rounded px-2.5 py-1.5 text-sm text-red-300 backdrop-blur-sm transition-colors flex flex-row gap-2 items-center cursor-pointer mb-4 float-right border
                 ${
                     selectedCount > 0
                         ? "bg-red-300/20 hover:bg-red-600 hover:text-red-200 border-red-300/30"

@@ -23,11 +23,25 @@ import {
     RiMailLine,
     RiTwitterXFill,
 } from "@remixicon/react";
+import { Label } from "../ui/label";
+import { TextureButton } from "../ui/texture-button";
 
 export default function Notifications() {
     const id = useId();
+    const [emails, setEmails] = useState([""]);
     const [copied, setCopied] = useState<boolean>(false);
+    const lastInputRef = useRef<HTMLInputElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+
+    const addEmail = () => {
+        setEmails([...emails, ""]);
+    };
+
+    const handleEmailChange = (index: number, value: string) => {
+        const newEmails = [...emails];
+        newEmails[index] = value;
+        setEmails(newEmails);
+    };
 
     const handleCopy = () => {
         if (inputRef.current) {
@@ -58,10 +72,11 @@ export default function Notifications() {
                     </kbd>
                 </TooltipContent>
             </Tooltip>
-            <PopoverContent className="w-72 mt-1 mr-0">
-                <div className="flex flex-col gap-3 text-center">
-                    <div className="text-sm font-medium">Share file</div>
-                    <div className="flex flex-wrap justify-center gap-2">
+            <PopoverContent className="w-80 mt-1 mr-4">
+                <div className="flex flex-col gap-2">
+                    <div className="text-md font-medium">Share file</div>
+                    <hr className="my-1 border-t" />
+                    {/* <div className="flex flex-wrap justify-center gap-2">
                         <Button
                             size="icon"
                             variant="outline"
@@ -94,8 +109,53 @@ export default function Notifications() {
                         >
                             <RiMailLine size={16} aria-hidden="true" />
                         </Button>
-                    </div>
-                    <div className="space-y-2">
+                    </div> */}
+
+                    <form className="space-y-4">
+                        <div className="space-y-2">
+                            <div className="*:not-first:mt-2">
+                                <Label>Share via email</Label>
+                                <div className="space-y-3">
+                                    {emails.map((email, index) => (
+                                        <Input
+                                            key={index}
+                                            id={`team-email-${index + 1}`}
+                                            placeholder="hi@yourcompany.com"
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) =>
+                                                handleEmailChange(
+                                                    index,
+                                                    e.target.value
+                                                )
+                                            }
+                                            ref={
+                                                index === emails.length - 1
+                                                    ? lastInputRef
+                                                    : undefined
+                                            }
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={addEmail}
+                                className="text-sm underline hover:no-underline"
+                            >
+                                + Add another
+                            </button>
+                        </div>
+                        {/* <Button type="button" className="w-full">
+                            Send invites
+                        </Button> */}
+                        <Button size="sm" className="cursor-pointer w-full">
+                            Send files
+                        </Button>
+                    </form>
+                    <hr className="my-1 border-t" />
+                    <div className="*:not-first:mt-2">
+                        <Label htmlFor={id}>Share via magic link</Label>
                         <div className="relative">
                             <Input
                                 ref={inputRef}

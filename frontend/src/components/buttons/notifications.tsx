@@ -138,7 +138,7 @@ export default function Notifications() {
                     <div className="text-sm font-semibold">Comments</div>
                     {unreadCount > 0 && (
                         <button
-                            className="text-xs font-medium hover:underline"
+                            className="text-xs font-medium hover:underline cursor-pointer"
                             onClick={handleMarkAllAsRead}
                         >
                             Mark all as read
