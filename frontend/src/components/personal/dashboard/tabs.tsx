@@ -3,7 +3,6 @@ import { TodoItem, Todos } from "./todo";
 import { useState } from "react";
 import DeleteButton from "./delete-button";
 import Form from "./form";
-import CreateButton from "./create-button";
 
 // Instead of importing Form, let's assume it's a component that adds new todos
 // and we'll just import it as a reference

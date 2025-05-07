@@ -2,16 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import TabsComponent from "@/components/personal/dashboard/tabs";
-import CreateButton from "@/components/personal/dashboard/create-button";
-import { FileUpload } from "@/components/personal/dashboard/package-upload";
+import { AnimatedModalDemo } from "@/components/personal/dashboard/drop-modal";
 
 export default function VanishList() {
     const [bgImage, setBgImage] = useState("");
-    const [files, setFiles] = useState<File[]>([]);
-    const handleFileUpload = (files: File[]) => {
-        setFiles(files);
-        console.log(files);
-    };
 
     useEffect(() => {
         const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -34,14 +28,11 @@ export default function VanishList() {
         >
             <div className="mx-auto w-full max-w-3xl px-4 mt-10 flex flex-col">
                 <Header />
-                <div className="flex justify-between items-center">
+                <AnimatedModalDemo />
+                {/* <div className="flex justify-between items-center">
                     <CreateButton />
-                </div>
-
+                </div> */}
                 <TabsComponent />
-            </div>
-            <div className="w-full max-w-4xl mx-auto min-h-96 border border-dashed bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-lg">
-                <FileUpload onChange={handleFileUpload} />
             </div>
         </section>
     );

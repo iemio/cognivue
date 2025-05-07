@@ -17,14 +17,7 @@ import {
 import { useId, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "../ui/input";
-import {
-    RiCodeFill,
-    RiFacebookFill,
-    RiMailLine,
-    RiTwitterXFill,
-} from "@remixicon/react";
 import { Label } from "../ui/label";
-import { TextureButton } from "../ui/texture-button";
 
 export default function Notifications() {
     const id = useId();
