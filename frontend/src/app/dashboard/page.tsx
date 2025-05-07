@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import TabsComponent from "@/components/personal/dashboard/tabs";
 import { AnimatedModalDemo } from "@/components/personal/dashboard/drop-modal";
+import { Modal } from "@/components/personal/dashboard/animated-modal";
 
 export default function VanishList() {
     const [bgImage, setBgImage] = useState("");
@@ -28,7 +29,9 @@ export default function VanishList() {
         >
             <div className="mx-auto w-full max-w-3xl px-4 mt-10 flex flex-col">
                 <Header />
-                <AnimatedModalDemo />
+                <Modal>
+                    <AnimatedModalDemo />
+                </Modal>
                 {/* <div className="flex justify-between items-center">
                     <CreateButton />
                 </div> */}
