@@ -122,19 +122,19 @@ export const ModalBody = ({
                         initial={{
                             opacity: 0,
                             scale: 0.5,
-                            rotateX: 40,
+                            // rotateX: 40,
                             y: 40,
                         }}
                         animate={{
                             opacity: 1,
                             scale: 1,
-                            rotateX: 0,
+                            // rotateX: 0,
                             y: 0,
                         }}
                         exit={{
                             opacity: 0,
                             scale: 0.8,
-                            rotateX: 10,
+                            // rotateX: 10,
                         }}
                         transition={{
                             type: "spring",

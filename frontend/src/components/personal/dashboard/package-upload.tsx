@@ -202,6 +202,7 @@ import React, { useRef, useState } from "react";
 import { motion } from "motion/react";
 import { PiUploadDuotone } from "react-icons/pi";
 import { useDropzone } from "react-dropzone";
+import { CiCircleRemove } from "react-icons/ci";
 
 const mainVariant = {
     initial: {
@@ -328,9 +329,10 @@ export const FileUpload = ({
                                                 e.stopPropagation();
                                                 clearFile();
                                             }}
-                                            className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 text-sm font-medium"
+                                            className="text-red-500 hover:text-red-700 dark:text-red-400 hover:dark:text-red-300 text-xl font-medium"
                                         >
-                                            ✕
+                                            {/* ✕ */}
+                                            <CiCircleRemove />
                                         </button>
                                     </div>
                                 </div>

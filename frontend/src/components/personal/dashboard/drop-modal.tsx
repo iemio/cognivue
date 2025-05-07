@@ -9,11 +9,12 @@ import {
 } from "./animated-modal";
 
 import { FileUpload } from "./package-upload";
+import { useRouter } from "next/navigation";
 
 export function AnimatedModalDemo() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [file, setFile] = useState<File | null>(null);
-
+    const router = useRouter();
     const { setOpen } = useModal();
     const handleFileUpload = (file: File | null) => {
         setFile(file);
@@ -40,7 +41,10 @@ export function AnimatedModalDemo() {
                     >
                         Cancel
                     </button>
-                    <button className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28 cursor-pointer">
+                    <button
+                        className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28 cursor-pointer"
+                        onClick={() => router.push("/file/temp")}
+                    >
                         Configure
                     </button>
                 </ModalFooter>
