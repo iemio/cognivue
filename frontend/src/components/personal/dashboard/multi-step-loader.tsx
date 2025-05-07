@@ -1,4 +1,4 @@
-"use client";
+"use client"; // error states also
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { useRouter } from "next/navigation";
@@ -34,8 +34,6 @@ const EmptyCircleIcon = ({ className }: { className?: string }) => {
     );
 };
 
-export default EmptyCircleIcon;
-
 const CheckFilled = ({ className }: { className?: string }) => {
     return (
         <svg
@@ -52,6 +50,23 @@ const CheckFilled = ({ className }: { className?: string }) => {
         </svg>
     );
 };
+
+// const CrossFilled = ({ className }: { className?: string }) => {
+//     return (
+//         <svg
+//             xmlns="http://www.w3.org/2000/svg"
+//             viewBox="0 0 24 24"
+//             fill="currentColor"
+//             className={cn("w-6 h-6", className)}
+//         >
+//             <path
+//                 fillRule="evenodd"
+//                 d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+//                 clipRule="evenodd"
+//             />
+//         </svg>
+//     );
+// };
 
 type LoadingState = {
     text: string;
@@ -87,19 +102,21 @@ const LoaderCore = ({
                                     className={cn(
                                         "text-black dark:text-white",
                                         value === index &&
-                                            "text-black dark:text-lime-500 opacity-100"
+                                            " text-lime-700 dark:text-lime-500 opacity-100"
                                     )}
                                 />
-                            )}
+                            )}{" "}
+                            {/*cross and red*/}
                         </div>
                         <span
                             className={cn(
                                 "text-black dark:text-white",
                                 value === index &&
-                                    "text-black dark:text-lime-500 opacity-100"
+                                    "text-lime-700 dark:text-lime-500 opacity-100"
                             )}
                         >
-                            {loadingState.text}
+                            {loadingState.text}{" "}
+                            {/*make this red if error comes in this state */}
                         </span>
                     </motion.div>
                 );

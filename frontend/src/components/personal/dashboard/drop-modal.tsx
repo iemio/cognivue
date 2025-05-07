@@ -14,7 +14,6 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 export function AnimatedModalDemo() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [file, setFile] = useState<File | null>(null);
-    const router = useRouter();
     const { setOpen } = useModal();
     const handleFileUpload = (file: File | null) => {
         setFile(file);
