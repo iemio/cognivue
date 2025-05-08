@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Pencil, TrashIcon } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -67,8 +66,9 @@ export default function More() {
                                     onValueChange={setColor}
                                     className="flex gap-1.5"
                                 >
-                                    {colors.map((color) => (
+                                    {colors.map((color, index) => (
                                         <DropdownMenuRadioItem
+                                            key={index}
                                             value={color}
                                             className={`size-6 border-${color}-500 bg-${color}-500 shadow-none data-[state=checked]:border-${color}-500 data-[state=checked]:bg-${color}-500`}
                                         ></DropdownMenuRadioItem>

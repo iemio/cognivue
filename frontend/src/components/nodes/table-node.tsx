@@ -1,7 +1,5 @@
 import { memo } from "react";
 import { Handle, Position, type NodeProps, type Node } from "@xyflow/react";
-import { Button } from "@/components/ui/button";
-import { RiMore2Fill } from "@remixicon/react";
 import { cn } from "@/lib/utils";
 import { initialEdges } from "@/lib/schema-data";
 import More from "./common/more-dropdown";
