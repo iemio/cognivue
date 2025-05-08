@@ -58,7 +58,7 @@ function TabsComponent() {
                     value="tab-1"
                     className="cursor-pointer relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
                 >
-                    All
+                    Boards
                 </TabsTrigger>
                 <TabsTrigger
                     value="tab-2"

@@ -183,17 +183,22 @@ function DropdownMenuRadioItem({
         <DropdownMenuPrimitive.RadioItem
             data-slot="dropdown-menu-radio-item"
             className={cn(
-                "focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+                "border-input data-[state=checked]:bg-primary data-[state=checked]:text-foreground data-[state=checked]:border-primary hover:border-ring hover:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-shadow outline-none hover:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
                 className
             )}
             {...props}
         >
-            <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
-                <DropdownMenuPrimitive.ItemIndicator>
-                    <CircleIcon className="size-2 fill-current" />
-                </DropdownMenuPrimitive.ItemIndicator>
-            </span>
-            {children}
+            <DropdownMenuPrimitive.ItemIndicator className="grid place-items-center mt-2">
+                <svg
+                    width="6"
+                    height="6"
+                    viewBox="0 0 6 6"
+                    fill="currentcolor"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <circle cx="3" cy="3" r="3" />
+                </svg>
+            </DropdownMenuPrimitive.ItemIndicator>
         </DropdownMenuPrimitive.RadioItem>
     );
 }
