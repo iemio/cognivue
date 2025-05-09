@@ -27,8 +27,8 @@ export default function More() {
     const [connectable, setConnectable] = useState(true);
     const [selectable, setSelectable] = useState(false);
 
-    const colors = ["background", "red", "amber", "blue", "emerald"];
-
+    const colors = ["background", "red", "orange", "amber", "blue", "emerald"];
+    console.log("color", color);
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -66,13 +66,21 @@ export default function More() {
                                     onValueChange={setColor}
                                     className="flex gap-1.5"
                                 >
-                                    {colors.map((color, index) => (
+                                    {colors.map((c, index) => (
                                         <DropdownMenuRadioItem
                                             key={index}
-                                            value={color}
-                                            className={`size-6 border-${color}-500 bg-${color}-500 shadow-none data-[state=checked]:border-${color}-500 data-[state=checked]:bg-${color}-500`}
+                                            value={c}
+                                            className={`size-6 border-${c}-500 bg-${c}-500 shadow-none data-[state=checked]:border-${c}-500 data-[state=checked]:bg-${c}-500 .data-[state=unchecked]:border-${c}-500`}
                                         ></DropdownMenuRadioItem>
                                     ))}
+                                    {/* <DropdownMenuRadioItem
+                                        value={"blue"}
+                                        className={`size-6 border-orange-500 bg-orange-500 shadow-none data-[state=checked]:border-blue-500 data-[state=checked]:bg-blue-500 .data-[state=unchecked]:border-blue-500`}
+                                    ></DropdownMenuRadioItem> */}
+                                    {/* <DropdownMenuRadioItem
+                                        value={"blue"}
+                                        className={`size-6 border-blue-500 bg-blue-500 shadow-none data-[state=checked]:border-blue-500 data-[state=checked]:bg-blue-500 .data-[state=unchecked]:border-blue-500`}
+                                    ></DropdownMenuRadioItem> */}
                                     {/* <DropdownMenuRadioItem
                                         value="Black"
                                         className="bg-black-500 focus:bg-black-500 h-6"

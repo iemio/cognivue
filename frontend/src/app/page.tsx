@@ -1,6 +1,6 @@
 "use client";
 import AboutSection from "@/components/landing-page/about-section";
-import { FeaturesSection } from "@/components/landing-page/features-section";
+import { FeatureSection } from "@/components/landing-page/features-section";
 import FooterSection from "@/components/footer";
 import { HeroSection } from "@/components/landing-page/hero-section";
 import { PricingSection } from "@/components/landing-page/pricing-section";
@@ -13,7 +13,7 @@ export default function Page() {
                 <HeroSection />
             </div>
             <div id="features">
-                <FeaturesSection />
+                <FeatureSection />
             </div>
             <div id="pricing">
                 <PricingSection tiers={defaultTiers} />

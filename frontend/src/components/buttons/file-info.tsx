@@ -10,6 +10,14 @@ import {
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 export default function FileInfo() {
+    const fileDetails = {
+        Name: "abc",
+        Created: "2023-10-01",
+        Author: "iemio",
+        LastEdit: "2023-10-02",
+        Contributors: ["iemio", "user2"],
+        Viewers: ["iemio", "user2", "user3"],
+    };
     return (
         <Popover>
             <Tooltip>
@@ -32,8 +40,17 @@ export default function FileInfo() {
                 </TooltipContent>
             </Tooltip>
             <PopoverContent className="w-72 mt-1 mr-4">
-                name of file and created time/date, author, conributors,
-                viewers, lastedit
+                <div className="flex flex-col gap-2 p-4">
+                    {Object.entries(fileDetails).map(([key, value]) => (
+                        <div
+                            key={key}
+                            className="flex justify-between text-sm text-muted-foreground/80"
+                        >
+                            <span>{key}</span>
+                            <span className="text-foreground/80">{`${value}`}</span>
+                        </div>
+                    ))}
+                </div>
             </PopoverContent>
         </Popover>
     );

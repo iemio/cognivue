@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckIcon, CopyIcon, Share2 as Share } from "lucide-react";
+import { CheckIcon, CopyIcon, Share2 as Share, QrCode } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,10 +14,12 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "../ui/tooltip";
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import QRCode from "qrcode";
+import { useTheme } from "next-themes";
 
 export default function Notifications() {
     const id = useId();
@@ -25,7 +27,8 @@ export default function Notifications() {
     const [copied, setCopied] = useState<boolean>(false);
     const lastInputRef = useRef<HTMLInputElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
-
+    const [currentURL, setCurrentURL] = useState("");
+    const { theme } = useTheme();
     const addEmail = () => {
         setEmails([...emails, ""]);
     };
@@ -43,6 +46,26 @@ export default function Notifications() {
             setTimeout(() => setCopied(false), 1500);
         }
     };
+
+    const [qrCode, setQrCode] = useState<string | null>(null);
+
+    useEffect(() => {
+        setCurrentURL(window.location.href);
+
+        const generateQRCode = async () => {
+            const qr = await QRCode.toDataURL(currentURL, {
+                width: 280, // Size of the QR code
+                margin: 0, // Margin around QR code
+                color: {
+                    dark: theme === "dark" ? "#fff" : "#000", // Custom color for dark parts (default is black)
+                    light: theme === "dark" ? "#000" : "#fff", // Custom color for light parts (default is white)
+                },
+            });
+            setQrCode(qr);
+        };
+        generateQRCode();
+    }, [currentURL]);
+
     return (
         <Popover>
             <Tooltip>
@@ -148,14 +171,52 @@ export default function Notifications() {
                     </form>
                     <hr className="my-1 border-t" />
                     <div className="*:not-first:mt-2">
-                        <Label htmlFor={id}>Share via magic link</Label>
-                        <div className="relative">
+                        <Label htmlFor={id}>
+                            {/* Share as QR Code or via magic link */}
+                        </Label>
+                        <div className="relative flex flex-row gap-2 items-center">
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        size="icon"
+                                        variant="outline"
+                                        className="relative bg-transparent cursor-pointer w-10"
+                                        aria-label="Open notifications"
+                                    >
+                                        <QrCode size={16} aria-hidden="true" />
+                                    </Button>
+                                    {/* <div></div> */}
+                                </PopoverTrigger>
+                                <PopoverContent
+                                    className="w-80 mr-2"
+                                    side="left"
+                                >
+                                    <div className="flex flex-col gap-4 items-center mt-2">
+                                        <div> Share as QR Code</div>
+                                        <div>
+                                            {qrCode ? (
+                                                <img
+                                                    src={qrCode}
+                                                    alt="QR Code"
+                                                />
+                                            ) : (
+                                                "Generating QR Code..."
+                                            )}
+                                        </div>
+                                        <div className="text-xs">
+                                            Scan the QR code with a tablet or
+                                            phone camera to quickly open this
+                                            file on other devices.
+                                        </div>
+                                    </div>
+                                </PopoverContent>
+                            </Popover>
                             <Input
                                 ref={inputRef}
                                 id={id}
                                 className="pe-9"
                                 type="text"
-                                defaultValue="https://cognivue.vercel.app"
+                                defaultValue={currentURL}
                                 aria-label="Share link"
                                 readOnly
                             />
@@ -168,7 +229,7 @@ export default function Notifications() {
                                             aria-label={
                                                 copied
                                                     ? "Copied"
-                                                    : "Copy to clipboard"
+                                                    : "Copy link to clipboard"
                                             }
                                             disabled={copied}
                                         >
@@ -202,7 +263,7 @@ export default function Notifications() {
                                         </button>
                                     </TooltipTrigger>
                                     <TooltipContent className="px-2 py-1 text-xs">
-                                        Copy to clipboard
+                                        Copy link
                                     </TooltipContent>
                                 </Tooltip>
                             </TooltipProvider>
