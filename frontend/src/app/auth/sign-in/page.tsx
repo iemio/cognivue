@@ -1,4 +1,4 @@
-import AuthPage from "@/components/forms/auth";
+import AuthPage from "@/components/landing-page/forms/auth";
 
 const Page = () => {
     return <AuthPage login={true} />;

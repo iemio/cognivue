@@ -20,8 +20,8 @@ import {
     RiMoonClearLine,
 } from "@remixicon/react";
 import { Button } from "@/components/ui/button";
-import TableNode from "@/components/nodes/table-node";
-import SchemaEdge from "@/components/edges/schema-edge";
+import TableNode from "@/components/vuespace/canvas/nodes/table-node";
+import SchemaEdge from "@/components/vuespace/canvas/edges/schema-edge";
 import { initialNodes, initialEdges } from "@/lib/schema-data";
 import { useTheme } from "next-themes";
 
@@ -34,7 +34,7 @@ const edgeTypes = {
     custom: SchemaEdge,
 };
 
-function SchemaVisualizerInner() {
+function CanvasInner() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -167,10 +167,10 @@ function SchemaVisualizerInner() {
     );
 }
 
-export default function SchemaVisualizer() {
+export default function Canvas() {
     return (
         <ReactFlowProvider>
-            <SchemaVisualizerInner />
+            <CanvasInner />
         </ReactFlowProvider>
     );
 }

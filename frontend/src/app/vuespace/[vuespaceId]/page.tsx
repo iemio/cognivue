@@ -1,12 +1,12 @@
-import Header from "@/components/header";
-import SchemaVisualizer from "@/components/custom-templates/schema-visualizer";
+import Header from "@/components/vuespace/header/header";
+import Canvas from "@/components/vuespace/canvas/custom-templates/schema-visualizer";
 import React from "react";
 
 const Page = () => {
     return (
         <div className="min-h-svh flex flex-col">
             <Header />
-            <SchemaVisualizer />
+            <Canvas />
         </div>
     );
 };

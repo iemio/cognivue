@@ -1,5 +1,5 @@
-import Header from "@/components/header";
-import SchemaVisualizer from "@/components/custom-templates/schema-visualizer";
+import Header from "@/components/vuespace/header/header";
+import SchemaVisualizer from "@/components/vuespace/canvas/custom-templates/schema-visualizer";
 import React from "react";
 
 const Page = () => {

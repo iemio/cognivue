@@ -5,12 +5,13 @@ import {
     DropdownMenuItem,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { Button } from "./ui/button";
+} from "../../../ui/dropdown-menu";
+import { Button } from "../../../ui/button";
 import { EllipsisIcon } from "lucide-react";
 
 import { defaultActions } from "@/lib/actions";
 import { Action } from "@/types/action";
+// import { Badge } from "./ui/badge";
 
 const actions: Action[] = [
     {
@@ -22,6 +23,13 @@ const actions: Action[] = [
 ];
 
 const ActionCenter = () => {
+    // if (true) {
+    //     return (
+    //         <Badge className="rounded" variant="outline">
+    //             Read only
+    //         </Badge>
+    //     );
+    // }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

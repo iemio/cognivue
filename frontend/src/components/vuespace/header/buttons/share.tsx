@@ -13,11 +13,11 @@ import {
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-} from "../ui/tooltip";
+} from "@/components/ui/tooltip";
 import { useEffect, useId, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import QRCode from "qrcode";
 import { useTheme } from "next-themes";
 

@@ -1,15 +1,14 @@
 "use client";
 import Link from "next/link";
-import Participants from "@/components/participants";
-import TemplateSwitcher from "@/components/template-switcher";
+import Participants from "@/components/vuespace/header/participants";
+import TemplateSwitcher from "@/components/vuespace/header/layout-switcher";
 import { Separator } from "@/components/ui/separator";
 // import ThemeToggle from "@/components/theme-toggle";
+import LogoIcon from "../../icons/logo";
+import ActionCenter from "./buttons/action-center";
+import FileInfo from "./buttons/file-info";
 import ShareButton from "./buttons/share";
 import Notifications from "./buttons/notifications";
-import LogoIcon from "./icons/logo";
-import FileInfo from "./buttons/file-info";
-import ActionCenter from "./action-center";
-
 export default function Header() {
     return (
         <header className="fixed top-2 md:top-5 w-full px-2 md:px-5 z-50">

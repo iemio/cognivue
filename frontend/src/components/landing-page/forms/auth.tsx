@@ -3,13 +3,13 @@
 import * as React from "react";
 import { ChevronLeft, Github, Twitter } from "lucide-react";
 import { motion } from "motion/react";
-import LogoIcon from "../icons/logo";
+import LogoIcon from "@/components/icons/logo";
 import SignInForm from "./sign-in";
 import SignUpForm from "./sign-up";
 import Link from "next/link";
 // import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
-import { DotPattern } from "../backgrounds/dot-pattern";
+import { DotPattern } from "@/components/backgrounds/dot-pattern";
 import { cn } from "@/lib/utils";
 
 type AuthProps = {

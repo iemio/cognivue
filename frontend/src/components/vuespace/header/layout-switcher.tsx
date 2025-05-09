@@ -20,19 +20,27 @@ import {
 
 const nodes = [
     {
-        name: "Schema-table",
-        href: "/templates/schema-visualizer",
+        name: "Canvas",
+        href: "/layout/schema-visualizer",
+    },
+    {
+        name: "Both",
+        href: "/layout/schema-visualizer",
+    },
+    {
+        name: "Document",
+        href: "/layout/schema-visualizer",
     },
 ];
 
-export default function TemplateSwitcher() {
+export default function LayoutSwitcher() {
     const [activeTemplate, setActiveTemplate] = useState(nodes[0] ?? null);
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem className="max-sm:hidden">
-                    <BreadcrumbLink href="#">Nodes</BreadcrumbLink>
+                    <BreadcrumbLink href="#">Vuespace</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="text-border max-sm:hidden">
                     {" "}

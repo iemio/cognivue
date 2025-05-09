@@ -1,7 +1,7 @@
 "use client";
 import AboutSection from "@/components/landing-page/about-section";
 import { FeatureSection } from "@/components/landing-page/features-section";
-import FooterSection from "@/components/footer";
+import FooterSection from "@/components/landing-page/footer";
 import { HeroSection } from "@/components/landing-page/hero-section";
 import { PricingSection } from "@/components/landing-page/pricing-section";
 import { defaultTiers } from "@/lib/features";
