@@ -42,26 +42,26 @@ export function AnimatedModalDemo() {
 
             // Get the processing time for this step (or default to 2000ms)
             const processingTime = processingTimes[stateIndex] || 2000;
-            var v = 10;
+            // var v = 10;
             // Simulate different processing times and outcomes for each step
             setTimeout(() => {
                 switch (stateIndex) {
                     case 0:
-                        v = 0;
-                        console.log(v);
+                        // v = 0;
+                        // console.log(v);
                         // First step passes after its processing time
-                        // console.log(
-                        //     `Step ${stateIndex} completed successfully after ${processingTime}ms`
-                        // );
+                        console.log(
+                            `Step ${stateIndex} completed successfully after ${processingTime}ms`
+                        );
                         resolve({ hasError: false });
                         break;
                     case 5:
-                        v = 5;
-                        console.log(v);
+                        // v = 5;
+                        // console.log(v);
                         // Second step fails after its processing time
-                        // console.log(
-                        //     `Step ${stateIndex} failed after ${processingTime}ms`
-                        // );
+                        console.log(
+                            `Step ${stateIndex} failed after ${processingTime}ms`
+                        );
                         resolve({
                             hasError: true,
                             // errorMessage: `Connection timeout after ${
@@ -73,21 +73,21 @@ export function AnimatedModalDemo() {
                         });
                         break;
                     case 4:
-                        v = 4;
-                        console.log(v);
+                        // v = 4;
+                        // console.log(v);
                         // Third step passes after its processing time
-                        // console.log(
-                        //     `Step ${stateIndex} completed successfully after ${processingTime}ms`
-                        // );
+                        console.log(
+                            `Step ${stateIndex} completed successfully after ${processingTime}ms`
+                        );
                         resolve({ hasError: false });
                         break;
                     case 2:
                         // Fourth step passes after its processing time
-                        v = 2;
-                        console.log(v);
-                        // console.log(
-                        //     `Step ${stateIndex} completed successfully after ${processingTime}ms`
-                        // );
+                        // v = 2;
+                        // console.log(v);
+                        console.log(
+                            `Step ${stateIndex} completed successfully after ${processingTime}ms`
+                        );
                         resolve({ hasError: false });
                         break;
                     default:
