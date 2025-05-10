@@ -36,7 +36,7 @@ const ActionCenter = () => {
                 <Button
                     size="icon"
                     variant="ghost"
-                    className="cursor-pointer rounded-full shadow-none"
+                    className="cursor-pointer rounded-full shadow-none lg:peer-data-[state=invisible]:-translate-x-7.5 transition-transform ease-in-out duration-300"
                     aria-label="Open edit menu"
                 >
                     <EllipsisIcon size={16} aria-hidden="true" />
