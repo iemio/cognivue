@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Participants from "@/components/vuespace/header/participants";
-import TemplateSwitcher from "@/components/vuespace/header/layout-switcher";
+import LayoutSwitcher from "@/components/vuespace/header/layout-switcher";
 import { Separator } from "@/components/ui/separator";
 // import ThemeToggle from "@/components/theme-toggle";
 import LogoIcon from "../../icons/logo";
@@ -9,7 +9,15 @@ import ActionCenter from "./buttons/action-center";
 import FileInfo from "./buttons/file-info";
 import ShareButton from "./buttons/share";
 import Notifications from "./buttons/notifications";
-export default function Header() {
+
+interface HeaderProps {
+    option: "Canvas" | "Document" | "Both";
+    setOption: React.Dispatch<
+        React.SetStateAction<"Canvas" | "Document" | "Both">
+    >;
+}
+
+const Header: React.FC<HeaderProps> = ({ option, setOption }) => {
     return (
         <header className="fixed top-2 md:top-5 w-full px-2 md:px-5 z-50">
             <div className="border border-border/80 rounded-xl bg-card/80 backdrop-blur-md h-12 md:h-16 flex justify-between items-center gap-2 px-4 shadow-lg/2">
@@ -22,7 +30,7 @@ export default function Header() {
                 </div>
                 {/* Center area */}
                 <div className="grow flex justify-center">
-                    <TemplateSwitcher />
+                    <LayoutSwitcher setOption={setOption} option={option} />
                 </div>
                 {/* Right area */}
                 <div className="flex-1 flex justify-end items-center gap-3">
@@ -39,4 +47,5 @@ export default function Header() {
             </div>
         </header>
     );
-}
+};
+export default Header;

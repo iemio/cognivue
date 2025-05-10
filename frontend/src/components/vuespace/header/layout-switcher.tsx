@@ -17,30 +17,33 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { GoWorkflow } from "react-icons/go";
+import { IoDocumentOutline } from "react-icons/io5";
+import { BsLayoutSplit } from "react-icons/bs";
 
-const nodes = [
-    {
-        name: "Canvas",
-        href: "/layout/schema-visualizer",
-    },
-    {
-        name: "Both",
-        href: "/layout/schema-visualizer",
-    },
-    {
-        name: "Document",
-        href: "/layout/schema-visualizer",
-    },
-];
+const layouts = [
+    { name: "Canvas", icon: <GoWorkflow /> },
+    { name: "Both", icon: <BsLayoutSplit /> },
+    { name: "Document", icon: <IoDocumentOutline /> },
+] as const;
 
-export default function LayoutSwitcher() {
-    const [activeTemplate, setActiveTemplate] = useState(nodes[0] ?? null);
+interface LayoutSwitcherProps {
+    option: "Canvas" | "Document" | "Both";
+    setOption: React.Dispatch<
+        React.SetStateAction<"Canvas" | "Document" | "Both">
+    >;
+}
+
+const LayoutSwitcher: React.FC<LayoutSwitcherProps> = ({
+    option,
+    setOption,
+}) => {
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem className="max-sm:hidden">
-                    <BreadcrumbLink href="#">Vuespace</BreadcrumbLink>
+                    <BreadcrumbLink href="#">Layout</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="text-border max-sm:hidden">
                     {" "}
@@ -49,7 +52,7 @@ export default function LayoutSwitcher() {
                 <BreadcrumbItem>
                     <DropdownMenu onOpenChange={setDropdownOpen}>
                         <DropdownMenuTrigger className="flex items-center gap-1 font-medium text-foreground cursor-pointer">
-                            {activeTemplate?.name ?? "Select Template"}
+                            {option ?? "Select Layout"}
                             <ChevronDownIcon
                                 className={`-me-1 opacity-60 ${
                                     dropdownOpen && "rotate-180"
@@ -59,13 +62,14 @@ export default function LayoutSwitcher() {
                             />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent sideOffset={10}>
-                            {nodes.map((template) => (
+                            {layouts.map((layout) => (
                                 <DropdownMenuItem
-                                    key={template.name}
-                                    onClick={() => setActiveTemplate(template)}
-                                    className="cursor-pointer"
+                                    key={layout.name}
+                                    onClick={() => setOption(layout.name)}
+                                    className="cursor-pointer flex flex-row gap-4"
                                 >
-                                    {template.name}
+                                    <div>{layout.icon}</div>
+                                    <div>{layout.name}</div>
                                 </DropdownMenuItem>
                             ))}
                         </DropdownMenuContent>
@@ -75,4 +79,6 @@ export default function LayoutSwitcher() {
         </Breadcrumb>
         // </div>
     );
-}
+};
+
+export default LayoutSwitcher;

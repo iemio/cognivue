@@ -34,7 +34,9 @@ function TableNode({ data, id }: NodeProps<TableNodeType>) {
         <div
             className={cn(
                 "rounded-xl bg-card shadow-[0_1px_1px_rgba(0,0,0,0.02),_0_2px_2px_rgba(0,0,0,0.02),_0_4px_4px_rgba(0,0,0,0.02),_0_8px_8px_rgba(0,0,0,0.02),_0_16px_16px_rgba(0,0,0,0.02),_0_32px_32px_rgba(0,0,0,0.02)] w-66 font-mono",
-                data.selected ? "ring-2 ring-primary ring-offset-2" : ""
+                data.selected
+                    ? "ring-2 ring-[#13EEE3]/80 ring-offset-3 ring-offset-background"
+                    : ""
             )}
         >
             <div className="flex items-center justify-between px-4 py-3 border-b border-border/80 bg-gradient-to-t from-background/70 dark:from-background/30">
