@@ -41,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ option, setOption }) => {
                     </Link> */}
                     <SidebarTrigger
                         data-state={open ? "invisible" : "visible"}
-                        className="peer size-7 text-muted-foreground/80 hover:text-foreground/80 hover:bg-transparent! sm:-ms-1.5 lg:data-[state=invisible]:opacity-0 lg:data-[state=invisible]:pointer-events-none transition-opacity ease-in-out duration-200"
+                        className="peer size-7 text-muted-foreground/80 hover:text-foreground/80 hover:bg-transparent! sm:-ms-1.5 lg:data-[state=invisible]:opacity-0 lg:data-[state=invisible]:pointer-events-none transition-opacity ease-in-out duration-200 cursor-pointer"
                         isOutsideSidebar
                     />
                     <ActionCenter />
@@ -52,6 +52,7 @@ const Header: React.FC<HeaderProps> = ({ option, setOption }) => {
                 </div>
                 {/* Right area */}
                 <div className="flex-1 flex justify-end items-center gap-3">
+                    {/**hide this in large apps */}
                     <Participants />
                     <ShareButton />
                     {/* <Notifications /> */}

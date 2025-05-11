@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
                 hostname: "res.cloudinary.com",
                 pathname: "/**", // Allow all Cloudinary images
             },
+            {
+                protocol: "https",
+                hostname: "assets.dub.co",
+                pathname: "/**", // Allow all Cloudinary images
+            },
         ],
     },
 };

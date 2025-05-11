@@ -1,5 +1,4 @@
 @import "tailwindcss";
-
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -37,6 +36,10 @@
     --sidebar-accent-foreground: oklch(0.21 0.006 285.885); /* Zinc 900 */
     --sidebar-border: oklch(0.92 0.004 286.32); /* Zinc 200 */
     --sidebar-ring: oklch(0.705 0.015 286.067); /* Zinc 400 */
+
+    --offset: 10px;
+    --slide-up-fade: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --fade-in: fade-in 0.2s ease-in-out forwards;
 }
 
 .dark {
@@ -71,6 +74,10 @@
     --sidebar-accent-foreground: oklch(0.985 0 0); /* Zinc 50 */
     --sidebar-border: oklch(1 0 0 / 10%); /* White / 10% */
     --sidebar-ring: oklch(0.552 0.016 285.938); /* Zinc 500 */
+
+    --offset: 10px;
+    --slide-up-fade: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --fade-in: fade-in 0.2s ease-in-out forwards;
 }
 
 @theme inline {
@@ -153,8 +160,17 @@
     html {
         scroll-behavior: smooth;
     }
-
     body {
         @apply bg-background text-foreground;
+    }
+}
+
+@layer utilities {
+    .transition-height {
+        transition-property: height;
+    }
+
+    .transition-spacing {
+        transition-property: margin, padding;
     }
 }

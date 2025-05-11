@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/sidebar";
 import Logo from "@/components/icons/logo";
 import { EventColor } from "@/types/priority";
+import { NewsArticle, News } from "./sidebar-news";
 
 export const comments = [
     {
@@ -27,6 +28,44 @@ export const comments = [
         isActive: true,
     },
 ];
+
+const DEMO_ARTICLES: NewsArticle[] = [
+    {
+        href: "https://dub.co/changelog/regions-support",
+        title: "Regions support in analytics",
+        summary: "You can now filter your analytics by regions",
+        image: "https://assets.dub.co/changelog/regions-support.png",
+    },
+    {
+        href: "https://dub.co/blog/soc2",
+        title: "Dub is now SOC 2 Type II Compliant",
+        summary:
+            "We're excited to announce that Dub has successfully completed a SOC 2 Type II audit to further demonstrate our commitment to security.",
+        image: "https://assets.dub.co/blog/soc2.jpg",
+    },
+    {
+        href: "https://dub.co/changelog/utm-templates",
+        title: "UTM Templates",
+        summary:
+            "You can now create UTM templates to streamline UTM campaign management across your team.",
+        image: "https://assets.dub.co/changelog/utm-templates.jpg",
+    },
+    {
+        href: "https://dub.co/changelog/utm-templates",
+        title: "UTM Templates",
+        summary:
+            "You can now create UTM templates to streamline UTM campaign management across your team.",
+        image: "https://assets.dub.co/changelog/utm-templates.jpg",
+    },
+    {
+        href: "https://dub.co/changelog/utm-templates",
+        title: "UTM Templates",
+        summary:
+            "You can now create UTM templates to streamline UTM campaign management across your team.",
+        image: "https://assets.dub.co/changelog/utm-templates.jpg",
+    },
+];
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar variant="inset" {...props} className=" max-lg:p-3 lg:pe-1">
@@ -56,7 +95,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarHeader>
             <SidebarContent className="gap-0 mt-3 pt-3 border-t">
                 <SidebarGroup className="px-1">
-                    sidebar something here
+                    sidebar widget here
                 </SidebarGroup>
                 <SidebarGroup className="px-1 mt-3 pt-4 border-t">
                     <SidebarGroupLabel className="uppercase text-muted-foreground/65">
@@ -112,7 +151,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
-            <SidebarFooter>{/**nav footer here */}</SidebarFooter>
+            <SidebarFooter>
+                {/**nav footer here */}
+                <News articles={DEMO_ARTICLES} />
+            </SidebarFooter>
         </Sidebar>
     );
 }
