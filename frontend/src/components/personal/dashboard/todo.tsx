@@ -1,3 +1,4 @@
+"use client";
 import { useEffect } from "react";
 import { AnimatePresence, motion, useAnimate, usePresence } from "motion/react";
 import { FiClock, FiMoreHorizontal } from "react-icons/fi";

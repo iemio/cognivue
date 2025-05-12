@@ -1,4 +1,5 @@
 // this contains selecting template or blank you can use button for selecting whether to drop files or not for ai feed ? food
+"use client";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";

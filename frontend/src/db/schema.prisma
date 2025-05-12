@@ -9,17 +9,21 @@ generator client {
 
 model Vuespace {
   id        String     @id @default(uuid())
-  text      String
-  author    User       @relation(fields: [authorId], references: [id])
-  authorId  String
+  name      String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt @default(now())
+  // Relation: Vuespace belongs to one author (User)
+  author    User       @relation("UserAuthored",fields: [authorId], references: [id])
+  authorId  String
+  // Relation: Vuespace can have many members
+  members   User[]     @relation("UserMembers")
 }
 
 model User {
-  id    String         @id @default(uuid())
-  email String         @unique
-  vuespaces Vuespace[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt @default(now())
+  id               String      @id @default(uuid())
+  email            String      @unique
+  authoredVuespaces Vuespace[] @relation("UserAuthored")
+  vuespaces        Vuespace[]  @relation("UserMembers")
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt @default(now())
 }

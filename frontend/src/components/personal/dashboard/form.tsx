@@ -182,7 +182,7 @@
 // };
 
 // export default Form;
-
+"use client";
 // blank as inbuilt template
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
