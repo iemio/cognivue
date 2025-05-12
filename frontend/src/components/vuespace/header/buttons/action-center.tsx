@@ -109,25 +109,23 @@ const ActionCenter = () => {
                         // }
 
                         return (
-                            <div>
-                                <div key={action.name}>
-                                    <DropdownMenuItem
-                                        onClick={
-                                            () => {}
-                                            // () => setOpen(true)
-                                            // handleActionClick(action)
-                                        }
-                                        className="cursor-pointer"
-                                        key={action.name}
-                                    >
-                                        {/* <SettingsDialog /> */}
-                                        {action.name}
-                                    </DropdownMenuItem>
+                            <div key={action.name}>
+                                <DropdownMenuItem
+                                    onClick={
+                                        () => {}
+                                        // () => setOpen(true)
+                                        // handleActionClick(action)
+                                    }
+                                    className="cursor-pointer"
+                                    key={action.name}
+                                >
+                                    {/* <SettingsDialog /> */}
+                                    {action.name}
+                                </DropdownMenuItem>
 
-                                    {nextAction &&
-                                        nextAction.default &&
-                                        !isDefault && <DropdownMenuSeparator />}
-                                </div>
+                                {nextAction &&
+                                    nextAction.default &&
+                                    !isDefault && <DropdownMenuSeparator />}
                             </div>
                         );
                     })}

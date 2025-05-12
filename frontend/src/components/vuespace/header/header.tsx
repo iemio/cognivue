@@ -10,7 +10,6 @@ import ShareButton from "./buttons/share";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/lib/hooks/use-mobile";
 import { cn } from "@/lib/utils";
-import { Modal } from "./buttons/animated-modal";
 
 interface HeaderProps {
     option: "Canvas" | "Document" | "Both";
