@@ -28,7 +28,7 @@ export const comments = [
         isActive: true,
     },
 ];
-
+// use different hrefs
 const DEMO_ARTICLES: NewsArticle[] = [
     {
         href: "https://dub.co/changelog/regions-support",
@@ -42,20 +42,6 @@ const DEMO_ARTICLES: NewsArticle[] = [
         summary:
             "We're excited to announce that Dub has successfully completed a SOC 2 Type II audit to further demonstrate our commitment to security.",
         image: "https://assets.dub.co/blog/soc2.jpg",
-    },
-    {
-        href: "https://dub.co/changelog/utm-templates",
-        title: "UTM Templates",
-        summary:
-            "You can now create UTM templates to streamline UTM campaign management across your team.",
-        image: "https://assets.dub.co/changelog/utm-templates.jpg",
-    },
-    {
-        href: "https://dub.co/changelog/utm-templates",
-        title: "UTM Templates",
-        summary:
-            "You can now create UTM templates to streamline UTM campaign management across your team.",
-        image: "https://assets.dub.co/changelog/utm-templates.jpg",
     },
     {
         href: "https://dub.co/changelog/utm-templates",

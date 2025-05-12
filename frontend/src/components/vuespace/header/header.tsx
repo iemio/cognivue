@@ -10,6 +10,7 @@ import ShareButton from "./buttons/share";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/lib/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import { Modal } from "./buttons/animated-modal";
 
 interface HeaderProps {
     option: "Canvas" | "Document" | "Both";
@@ -44,6 +45,7 @@ const Header: React.FC<HeaderProps> = ({ option, setOption }) => {
                         className="peer size-7 text-muted-foreground/80 hover:text-foreground/80 hover:bg-transparent! sm:-ms-1.5 lg:data-[state=invisible]:opacity-0 lg:data-[state=invisible]:pointer-events-none transition-opacity ease-in-out duration-200 cursor-pointer"
                         isOutsideSidebar
                     />
+
                     <ActionCenter />
                 </div>
                 {/* Center area */}

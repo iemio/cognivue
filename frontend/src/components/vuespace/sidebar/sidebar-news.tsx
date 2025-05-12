@@ -96,7 +96,7 @@ export function News({ articles }: { articles: NewsArticle[] }) {
                         <div className="animate-fade-in absolute inset-0 rounded-lg border border-neutral-300 [animation-delay:2.3s] [animation-direction:reverse] [animation-duration:0.2s]" />
                         <AnimatedLogo className="w-1/3" />
                         <span className="animate-fade-in text-xs font-medium text-muted-foreground [animation-delay:2.3s] [animation-direction:reverse] [animation-duration:0.2s]">
-                            You're all caught up!
+                            You&apos;re all caught up!
                         </span>
                     </div>
                 )}
