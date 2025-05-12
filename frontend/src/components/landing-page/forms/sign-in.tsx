@@ -2,7 +2,7 @@
 import { loginAction } from "@/app/auth/actions";
 import { useToast } from "@/lib/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import React, { useState, useTransition } from "react";
+import React, { useTransition } from "react";
 
 const SignInForm: React.FC = () => {
     const router = useRouter();

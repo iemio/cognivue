@@ -7,23 +7,40 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum Role {
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
 model Vuespace {
   id        String     @id @default(uuid())
   name      String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt @default(now())
-  // Relation: Vuespace belongs to one author (User)
-  author    User       @relation("UserAuthored",fields: [authorId], references: [id])
+  author    User       @relation("UserVuespaces",fields: [authorId], references: [id])
   authorId  String
-  // Relation: Vuespace can have many members
-  members   User[]     @relation("UserMembers")
+  members   Member[]
 }
 
 model User {
   id               String      @id @default(uuid())
+  name             String
   email            String      @unique
-  authoredVuespaces Vuespace[] @relation("UserAuthored")
-  vuespaces        Vuespace[]  @relation("UserMembers")
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt @default(now())
+  memberships Member[]
+  vuespaces   Vuespace[] @relation("UserVuespaces")
+
+}
+
+model Member {
+  id        String   @id @default(uuid())
+  user    User      @relation(fields: [userId], references: [id])
+  userId  String
+  vuespace  Vuespace @relation(fields: [vuespaceId], references: [id])
+  vuespaceId  String
+  role      Role     @default(VIEWER)
+
+  @@unique([userId, vuespaceId])
 }

@@ -3,7 +3,7 @@ import TabsComponent from "@/components/personal/dashboard/tabs";
 import { AnimatedModalDemo } from "@/components/personal/dashboard/drop-modal";
 import { Modal } from "@/components/personal/dashboard/animated-modal";
 
-export default function VanishList() {
+export default async function VanishList() {
     // const [bgImage, setBgImage] = useState("");
     // const { theme } = useTheme();
     // useEffect(() => {
@@ -47,7 +47,7 @@ const Header = () => {
     return (
         <div className="mb-6">
             <h1 className="text-xl font-medium text-white">
-                Good morning user! ☀️ 🌙
+                Good morning ! ☀️ 🌙
             </h1>
             <p className="text-zinc-400">
                 Let&apos;s see what we need to work on today.

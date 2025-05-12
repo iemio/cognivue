@@ -46,7 +46,7 @@ export async function updateSession(request: NextRequest) {
             data: { user },
         } = await supabase.auth.getUser();
         if (user) {
-            console.log("helo");
+            // console.log("helo");
             return NextResponse.redirect(
                 new URL("/dashboard", process.env.NEXT_PUBLIC_BASE_URL)
             );
