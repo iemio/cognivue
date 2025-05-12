@@ -2,6 +2,7 @@ import { Inter, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "../providers/theme-provider";
 import "./globals.css";
 import type { Metadata } from "next";
+import { Toaster } from "@/components/ui/toaster";
 export const metadata: Metadata = {
     title: "Cognivue",
     icons: [
@@ -45,6 +46,7 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     {children}
+                    <Toaster />
                 </ThemeProvider>
             </body>
         </html>

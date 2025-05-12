@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import { ChevronLeft, Github, Twitter } from "lucide-react";
 import { motion } from "motion/react";
