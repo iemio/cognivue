@@ -56,7 +56,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar variant="inset" {...props} className=" max-lg:p-3 lg:pe-1">
             <SidebarHeader>
-                <div className="flex justify-between items-center gap-2 mt-2">
+                <div className="flex justify-between items-center gap-2 mt-4">
                     <Link className="inline-flex" href="/">
                         <span className="sr-only">Logo</span>
                         <Logo />
@@ -76,7 +76,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             />
                         </svg> */}
                     </Link>
-                    <SidebarTrigger className="text-muted-foreground/80 hover:text-foreground/80 hover:bg-transparent!" />
+                    <SidebarTrigger className="text-muted-foreground/80 hover:text-foreground/80 hover:bg-transparent! cursor-pointer" />
                 </div>
             </SidebarHeader>
             <SidebarContent className="gap-0 mt-3 pt-3 border-t">

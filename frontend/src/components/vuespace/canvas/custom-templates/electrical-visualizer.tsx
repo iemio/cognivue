@@ -65,9 +65,16 @@ function CanvasInner() {
                     // attributionPosition="bottom-left" // you should remove this line if you don't want to show the attribution
                 >
                     <Background
-                        variant={BackgroundVariant.Dots}
-                        gap={20}
-                        size={2}
+                        variant={BackgroundVariant.Lines}
+                        gap={10}
+                        color="#eee"
+                        id="1"
+                    />
+                    <Background
+                        variant={BackgroundVariant.Lines}
+                        gap={100}
+                        color="#ccc"
+                        id="2"
                     />
                     <Toolbar />
                     <BottomPanel />

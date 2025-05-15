@@ -183,7 +183,7 @@ function DropdownMenuRadioItem({
         <DropdownMenuPrimitive.RadioItem
             data-slot="dropdown-menu-radio-item"
             className={cn(
-                "border-input data-[state=checked]:bg-primary data-[state=checked]:text-foreground data-[state=checked]:border-primary hover:border-ring hover:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-shadow outline-none hover:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
+                "border-input data-[state=checked]:bg-primary data-[state=checked]:text-background data-[state=checked]:border-primary hover:border-ring hover:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-shadow outline-none hover:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
                 className
             )}
             {...props}

@@ -2,6 +2,8 @@ import React from "react";
 import TabsComponent from "@/components/personal/dashboard/tabs";
 import { AnimatedModalDemo } from "@/components/personal/dashboard/drop-modal";
 import { Modal } from "@/components/personal/dashboard/animated-modal";
+import { prisma } from "@/db/prisma";
+import { getUser } from "@/auth/server";
 
 export default async function VanishList() {
     // const [bgImage, setBgImage] = useState("");
@@ -16,12 +18,23 @@ export default async function VanishList() {
     //     // const svg = `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke-width='2' stroke='${strokeColor}'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`;
     //     setBgImage(svg);
     // }, []);
-
+    // const user = await getUser();
+    // const userD = await prisma.user.findUnique({
+    //     where: {
+    //         id: user?.id, // You can replace 'id' with the actual column name in the User model if needed
+    //     },
+    //     include: {
+    //         memberships: true, // Include memberships if you need them
+    //         vuespaces: true, // Include vuespaces if you need them
+    //     },
+    // });
+    // console.log(userD);
     return (
         <section
-            className="min-h-screen bg-zinc-950 py-24"
+            className="min-h-screen py-24 bg-background"
             style={{
                 backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke-width='2' stroke='%2318181b'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`,
+                // for light backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke-width='2' stroke='%23d4d4d4'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`,
             }}
         >
             {/* <section

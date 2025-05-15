@@ -1,10 +1,6 @@
-import React from "react";
-
-const LogoIcon = () => {
-    return (
         <svg
             id="logo-46"
-            className="gradient"
+            class="gradient"
             width="60"
             height="30"
             viewBox="0 0 60 30"
@@ -43,9 +39,9 @@ const LogoIcon = () => {
                     gradientUnits="userSpaceOnUse"
                 >
                     {" "}
-                    <stop className="ccustom" stop-color="#FF557E"></stop>{" "}
+                    <stop class="ccustom" stop-color="#FF557E"></stop>{" "}
                     <stop
-                        className="ccompli1"
+                        class="ccompli1"
                         offset="0.841052"
                         stop-color="#FF5555"
                         stop-opacity="0"
@@ -60,9 +56,9 @@ const LogoIcon = () => {
                     gradientUnits="userSpaceOnUse"
                 >
                     {" "}
-                    <stop className="ccompli1" stop-color="#58CCDC"></stop>{" "}
+                    <stop class="ccompli1" stop-color="#58CCDC"></stop>{" "}
                     <stop
-                        className="ccompli1"
+                        class="ccompli1"
                         offset="1"
                         stop-color="#58CCDC"
                         stop-opacity="0"
@@ -77,14 +73,14 @@ const LogoIcon = () => {
                     gradientTransform="translate(45.4879 35.041) rotate(-122.928) scale(37.051 30.3393)"
                 >
                     {" "}
-                    <stop className="ccompli2" stop-color="#8263DB"></stop>{" "}
+                    <stop class="ccompli2" stop-color="#8263DB"></stop>{" "}
                     <stop
                         offset="0.568731"
                         stop-color="#8172DA"
                         stop-opacity="0.26"
                     ></stop>{" "}
                     <stop
-                        className="ccompli2"
+                        class="ccompli2"
                         offset="1"
                         stop-color="#8172DA"
                         stop-opacity="0"
@@ -99,15 +95,15 @@ const LogoIcon = () => {
                     gradientTransform="translate(18.3021 -4.19503) rotate(77.6745) scale(24.9567 39.2264)"
                 >
                     {" "}
-                    <stop className="ccompli1" stop-color="#41D1B7"></stop>{" "}
+                    <stop class="ccompli1" stop-color="#41D1B7"></stop>{" "}
                     <stop
-                        className="ccompli1"
+                        class="ccompli1"
                         offset="0.492704"
                         stop-color="#41D1B7"
                         stop-opacity="0.35"
                     ></stop>{" "}
                     <stop
-                        className="ccompli1"
+                        class="ccompli1"
                         offset="1"
                         stop-color="#41D1B7"
                         stop-opacity="0"
@@ -122,15 +118,15 @@ const LogoIcon = () => {
                     gradientTransform="translate(59.6446 -10.7446) rotate(125.113) scale(27.1121 57.4261)"
                 >
                     {" "}
-                    <stop className="ccompli2" stop-color="#FFEC45"></stop>{" "}
+                    <stop class="ccompli2" stop-color="#FFEC45"></stop>{" "}
                     <stop
-                        className="ccompli2"
+                        class="ccompli2"
                         offset="0.549191"
                         stop-color="#FFEC45"
                         stop-opacity="0.3"
                     ></stop>{" "}
                     <stop
-                        className="ccompli2"
+                        class="ccompli2"
                         offset="0.961144"
                         stop-color="#FFEC45"
                         stop-opacity="0"
@@ -138,7 +134,3 @@ const LogoIcon = () => {
                 </radialGradient>{" "}
             </defs>{" "}
         </svg>
-    );
-};
-
-export default LogoIcon;

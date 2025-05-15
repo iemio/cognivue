@@ -5,18 +5,18 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
 export const metadata: Metadata = {
     title: "Cognivue",
-    icons: [
-        {
-            rel: "icon",
-            url: "/favicon-light.ico",
-            media: "(prefers-color-scheme: light)",
-        },
-        {
-            rel: "icon",
-            url: "/favicon-dark.ico",
-            media: "(prefers-color-scheme: dark)",
-        },
-    ],
+    // icons: [
+    //     {
+    //         rel: "icon",
+    //         url: "/favicon-light.ico",
+    //         media: "(prefers-color-scheme: light)",
+    //     },
+    //     {
+    //         rel: "icon",
+    //         url: "/favicon-dark.ico",
+    //         media: "(prefers-color-scheme: dark)",
+    //     },
+    // ],
 };
 
 const fontSans = Inter({

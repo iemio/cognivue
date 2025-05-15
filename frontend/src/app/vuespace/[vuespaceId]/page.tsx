@@ -1,10 +1,11 @@
 "use client";
 import Header from "@/components/vuespace/header/header";
-import Canvas from "@/components/vuespace/canvas/custom-templates/schema-visualizer";
+// import Canvas from "@/components/vuespace/canvas/custom-templates/schema-visualizer";
 import React, { useState } from "react";
 import Editor from "@/components/vuespace/slate/Editor";
 import { useIsMobile } from "@/lib/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import Canvas from "@/components/vuespace/canvas/custom-templates/electrical-visualizer";
 
 const Page = () => {
     const [option, setOption] = useState<"Canvas" | "Document" | "Both">(
