@@ -2,8 +2,8 @@ import React from "react";
 import TabsComponent from "@/components/personal/dashboard/tabs";
 import { AnimatedModalDemo } from "@/components/personal/dashboard/drop-modal";
 import { Modal } from "@/components/personal/dashboard/animated-modal";
-import { prisma } from "@/db/prisma";
-import { getUser } from "@/auth/server";
+// import { prisma } from "@/db/prisma";
+// import { getUser } from "@/auth/server";
 
 export default async function VanishList() {
     // const [bgImage, setBgImage] = useState("");
