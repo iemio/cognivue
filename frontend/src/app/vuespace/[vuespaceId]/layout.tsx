@@ -2,6 +2,7 @@ import { AppSidebar } from "@/components/vuespace/sidebar/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
+import { ReactFlowProvider } from "@xyflow/react";
 
 export const metadata: Metadata = {
     title: "Cognivue | Vuespace",
@@ -18,15 +19,17 @@ export default async function DashboardLayout({
     const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
     return (
         // <KBar>
-        <SidebarProvider defaultOpen={defaultOpen}>
-            <AppSidebar />
-            <SidebarInset className="">
-                {/* page main content */}
-                {children}
+        <ReactFlowProvider>
+            <SidebarProvider defaultOpen={defaultOpen}>
+                <AppSidebar />
+                <SidebarInset className="">
+                    {/* page main content */}
+                    {children}
 
-                {/* page main content ends */}
-            </SidebarInset>
-        </SidebarProvider>
+                    {/* page main content ends */}
+                </SidebarInset>
+            </SidebarProvider>
+        </ReactFlowProvider>
         // </KBar>
     );
 }

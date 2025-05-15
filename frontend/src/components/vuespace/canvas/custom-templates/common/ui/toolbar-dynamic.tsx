@@ -104,7 +104,7 @@ export function Toolbar({ items }: ToolbarProps) {
                                 variant="ghost"
                                 size="icon"
                                 className={cn(
-                                    "h-9 w-9",
+                                    "h-9 w-9 cursor-pointer",
                                     active === item.id &&
                                         "bg-muted text-foreground"
                                 )}

@@ -5,6 +5,11 @@ export const defaultActions = [
         default: true,
     },
     {
+        name: "Download PNG",
+        action: "downloadPNG",
+        default: true,
+    },
+    {
         name: "Settings",
         action: "settings",
         default: true,

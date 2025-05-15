@@ -2,7 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Panel } from "@xyflow/react";
 import React from "react";
 import { Box, Spline, Frame, Command } from "lucide-react";
-import { Toolbar, type ToolbarItem } from "./ui/toolbar-dynamic";
+import {
+    Toolbar,
+    type ToolbarItem,
+} from "@/components/vuespace/canvas/custom-templates/common/ui/toolbar-dynamic";
 const TOOLBAR_ITEMS: ToolbarItem[] = [
     {
         id: 1,

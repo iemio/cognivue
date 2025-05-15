@@ -1,3 +1,168 @@
+// import React from "react";
+// import {
+//     DropdownMenu,
+//     DropdownMenuContent,
+//     DropdownMenuItem,
+//     DropdownMenuSeparator,
+//     DropdownMenuTrigger,
+// } from "../../../ui/dropdown-menu";
+// import { Button } from "../../../ui/button";
+// import { EllipsisIcon } from "lucide-react";
+
+// import { defaultActions } from "@/lib/actions";
+// import { Action } from "@/types/action";
+// import {
+//     getNodesBounds,
+//     getViewportForBounds,
+//     useReactFlow,
+// } from "@xyflow/react";
+// // import { SettingsDialog } from "./settings-dialog";
+
+// // import { Badge } from "./ui/badge";
+
+// // import {
+// //     Bell,
+// //     Check,
+// //     Globe,
+// //     Home,
+// //     Keyboard,
+// //     Link,
+// //     Lock,
+// //     Menu,
+// //     MessageCircle,
+// //     Paintbrush,
+// //     Settings,
+// //     Video,
+// // } from "lucide-react";
+// import { toPng } from "html-to-image";
+// import { useTheme } from "next-themes";
+
+// const actions: Action[] = [
+//     {
+//         name: "Export Schema",
+//         action: "exportSchema",
+//     },
+
+//     ...defaultActions,
+// ];
+
+// const IMAGE_WIDTH = 1024;
+// const IMAGE_HEIGHT = 768;
+
+// const downloadImage = (dataUrl: string) => {
+//     const a = document.createElement("a");
+
+//     a.setAttribute("download", "reactflow.png");
+//     a.setAttribute("href", dataUrl);
+
+//     a.click();
+// };
+
+// const ActionCenter = () => {
+//     // if (true) {
+//     //     return (
+//     //         <Badge className="rounded" variant="outline">
+//     //             Read only
+//     //         </Badge>
+//     //     );
+//     // }
+//     const handleActionClick = (action: Action) => {
+//         switch (action.action) {
+//             case "exportSchema":
+//                 console.log("Schema exported!");
+//                 // You can trigger export logic here
+//                 break;
+//             case "downloadPNG":
+//                 const { getNodes } = useReactFlow();
+//                 const { theme } = useTheme();
+//                 const isDark = theme === "dark";
+//                 let color = "white";
+//                 if (isDark) color = "black";
+
+//                 const nodesBounds = getNodesBounds(getNodes());
+//                 const { x, y, zoom } = getViewportForBounds(
+//                     nodesBounds,
+//                     IMAGE_WIDTH,
+//                     IMAGE_HEIGHT,
+//                     0.5,
+//                     2,
+//                     1
+//                 );
+
+//                 const reactFlow = document.querySelector(
+//                     ".react-flow__viewport"
+//                 ) as HTMLElement;
+//                 if (!reactFlow) return;
+
+//                 toPng(reactFlow, {
+//                     backgroundColor: color,
+//                     width: IMAGE_WIDTH,
+//                     height: IMAGE_HEIGHT,
+//                     style: {
+//                         width: `${IMAGE_WIDTH}px`,
+//                         height: `${IMAGE_HEIGHT}px`,
+//                         transform: `translate(${x}px, ${y}px) scale(${zoom})`,
+//                     },
+//                 }).then(downloadImage);
+
+//                 break;
+//             case "deleteNode":
+//                 console.log("Node deleted!");
+//                 // Logic for deleting a node
+//                 break;
+//             case "openSettings":
+//                 console.log("Settings opened!");
+//                 // Logic for opening settings
+//                 break;
+//             default:
+//                 console.warn(`No handler defined for action: ${action.action}`);
+//         }
+//     };
+//     return (
+//         <>
+//             <DropdownMenu>
+//                 <DropdownMenuTrigger asChild>
+//                     <Button
+//                         size="icon"
+//                         variant="ghost"
+//                         className="cursor-pointer rounded-full shadow-none lg:peer-data-[state=invisible]:-translate-x-7.5 transition-transform ease-in-out duration-300"
+//                         aria-label="Open edit menu"
+//                     >
+//                         <EllipsisIcon size={16} aria-hidden="true" />
+//                     </Button>
+//                 </DropdownMenuTrigger>
+//                 <DropdownMenuContent align="start">
+//                     {/* <SettingsDialog /> */}
+//                     {actions.map((action, index) => {
+//                         const isDefault = action.default ?? false;
+//                         const nextAction = actions[index + 1];
+
+//                         return (
+//                             <div key={action.name}>
+//                                 <DropdownMenuItem
+//                                     onClick={() => {
+//                                         handleActionClick(action);
+//                                     }}
+//                                     className="cursor-pointer"
+//                                     key={action.name}
+//                                 >
+//                                     {/* <SettingsDialog /> */}
+//                                     {action.name}
+//                                 </DropdownMenuItem>
+
+//                                 {nextAction &&
+//                                     nextAction.default &&
+//                                     !isDefault && <DropdownMenuSeparator />}
+//                             </div>
+//                         );
+//                     })}
+//                 </DropdownMenuContent>
+//             </DropdownMenu>
+//         </>
+//     );
+// };
+
+// export default ActionCenter;
 import React from "react";
 import {
     DropdownMenu,
@@ -11,24 +176,13 @@ import { EllipsisIcon } from "lucide-react";
 
 import { defaultActions } from "@/lib/actions";
 import { Action } from "@/types/action";
-// import { SettingsDialog } from "./settings-dialog";
-
-// import { Badge } from "./ui/badge";
-
-// import {
-//     Bell,
-//     Check,
-//     Globe,
-//     Home,
-//     Keyboard,
-//     Link,
-//     Lock,
-//     Menu,
-//     MessageCircle,
-//     Paintbrush,
-//     Settings,
-//     Video,
-// } from "lucide-react";
+import {
+    getNodesBounds,
+    getViewportForBounds,
+    useReactFlow,
+} from "@xyflow/react";
+import { toPng } from "html-to-image";
+import { useTheme } from "next-themes";
 
 const actions: Action[] = [
     {
@@ -39,129 +193,110 @@ const actions: Action[] = [
     ...defaultActions,
 ];
 
+const IMAGE_WIDTH = 1024;
+const IMAGE_HEIGHT = 768;
+
+const downloadImage = (dataUrl: string) => {
+    const a = document.createElement("a");
+    a.setAttribute("download", "reactflow.png");
+    a.setAttribute("href", dataUrl);
+    a.click();
+};
+
 const ActionCenter = () => {
-    // if (true) {
-    //     return (
-    //         <Badge className="rounded" variant="outline">
-    //             Read only
-    //         </Badge>
-    //     );
-    // }
-    // const { setOpen } = useModal();
-    // const [selectedAction, setSelectedAction] = useState<Action | null>(null);
+    // ✅ Move hooks to component body
+    const { getNodes } = useReactFlow();
+    const { theme } = useTheme();
+    const isDark = theme === "dark";
 
-    // Function to render dialog content based on selected action
-    // const renderDialogContent = () => {
-    //     if (!selectedAction) return null;
+    const handleActionClick = (action: Action) => {
+        switch (action.action) {
+            case "exportSchema":
+                console.log("Schema exported!");
+                break;
 
-    //     switch (selectedAction.action) {
-    //         case "exportSchema":
-    //             return <>abc</>;
-    //         default:
-    //             // Return the contents of SettingsDialog but without the Dialog wrapper
-    //             // This is using the component structure from your pasted code
-    //             return <SettingsDialog />;
-    //         case "settings":
-    //             const data = {
-    //                 nav: [
-    //                     { name: "Notifications", icon: Bell },
-    //                     { name: "Navigation", icon: Menu },
-    //                     { name: "Home", icon: Home },
-    //                     { name: "Appearance", icon: Paintbrush },
-    //                     { name: "Messages & media", icon: MessageCircle },
-    //                     { name: "Language & region", icon: Globe },
-    //                     { name: "Accessibility", icon: Keyboard },
-    //                     { name: "Mark as read", icon: Check },
-    //                     { name: "Audio & video", icon: Video },
-    //                     { name: "Connected accounts", icon: Link },
-    //                     { name: "Privacy & visibility", icon: Lock },
-    //                     { name: "Advanced", icon: Settings },
-    //                 ],
-    //             };
-    //             return <>def</>;
-    //     }
-    // };
+            case "downloadPNG": {
+                let color = isDark ? "black" : "white";
+
+                // Get node bounds and viewport
+                const nodesBounds = getNodesBounds(getNodes());
+                const { x, y, zoom } = getViewportForBounds(
+                    nodesBounds,
+                    IMAGE_WIDTH,
+                    IMAGE_HEIGHT,
+                    0.5,
+                    2,
+                    1
+                );
+
+                // Find the viewport element
+                const reactFlow = document.querySelector(
+                    ".react-flow__viewport"
+                ) as HTMLElement;
+                if (!reactFlow) return;
+
+                // Generate PNG
+                toPng(reactFlow, {
+                    backgroundColor: color,
+                    width: IMAGE_WIDTH,
+                    height: IMAGE_HEIGHT,
+                    style: {
+                        width: `${IMAGE_WIDTH}px`,
+                        height: `${IMAGE_HEIGHT}px`,
+                        transform: `translate(${x}px, ${y}px) scale(${zoom})`,
+                    },
+                }).then(downloadImage);
+
+                break;
+            }
+
+            case "deleteNode":
+                console.log("Node deleted!");
+                break;
+
+            case "openSettings":
+                console.log("Settings opened!");
+                break;
+
+            default:
+                console.warn(`No handler defined for action: ${action.action}`);
+        }
+    };
 
     return (
-        <>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button
-                        size="icon"
-                        variant="ghost"
-                        className="cursor-pointer rounded-full shadow-none lg:peer-data-[state=invisible]:-translate-x-7.5 transition-transform ease-in-out duration-300"
-                        aria-label="Open edit menu"
-                    >
-                        <EllipsisIcon size={16} aria-hidden="true" />
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start">
-                    {/* <SettingsDialog /> */}
-                    {actions.map((action, index) => {
-                        const isDefault = action.default ?? false;
-                        const nextAction = actions[index + 1];
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button
+                    size="icon"
+                    variant="ghost"
+                    className="cursor-pointer rounded-full shadow-none lg:peer-data-[state=invisible]:-translate-x-7.5 transition-transform ease-in-out duration-300"
+                    aria-label="Open edit menu"
+                >
+                    <EllipsisIcon size={16} aria-hidden="true" />
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+                {actions.map((action, index) => {
+                    const isDefault = action.default ?? false;
+                    const nextAction = actions[index + 1];
 
-                        // if (nextAction && !nextAction.default && isDefault) {
-                        //     console.log(
-                        //         "Next action exists and is not default:",
-                        //         nextAction
-                        //     );
-                        // }
+                    return (
+                        <div key={action.name}>
+                            <DropdownMenuItem
+                                onClick={() => handleActionClick(action)}
+                                className="cursor-pointer"
+                            >
+                                {action.name}
+                            </DropdownMenuItem>
 
-                        return (
-                            <div key={action.name}>
-                                <DropdownMenuItem
-                                    onClick={
-                                        () => {}
-                                        // () => setOpen(true)
-                                        // handleActionClick(action)
-                                    }
-                                    className="cursor-pointer"
-                                    key={action.name}
-                                >
-                                    {/* <SettingsDialog /> */}
-                                    {action.name}
-                                </DropdownMenuItem>
-
-                                {nextAction &&
-                                    nextAction.default &&
-                                    !isDefault && <DropdownMenuSeparator />}
-                            </div>
-                        );
-                    })}
-                </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* <ModalBody onClose={() => {}}>
-                <ModalContent>
-                    <div className="w-full max-w-4xl mx-auto min-h-96 border border-dashed bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-lg">
-                        helloooo
-                    </div>
-                </ModalContent>
-                <ModalFooter className="gap-4">
-                    <button
-                        className="px-2 py-1 bg-gray-200 text-black dark:bg-black dark:border-black dark:text-white border border-gray-300 rounded-md text-sm w-28 cursor-pointer"
-                        onClick={() => {
-                            setOpen(false);
-                        }}
-                    >
-                        Cancel
-                    </button>
-                    {/* <button
-                        disabled={!file}
-                        className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28 cursor-pointer"
-                        onClick={() => setLoading(true)}
-                    > */}
-            {/* <button
-                        disabled={false}
-                        className="bg-gray-900 text-gray-300 dark:bg-gray-100 dark:text-gray-800 text-sm px-2 py-1 rounded-md border border-gray-900 w-28 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-700 disabled:text-gray-400 disabled:border-gray-600 dark:disabled:bg-gray-300 dark:disabled:text-gray-600 dark:disabled:border-gray-400"
-                        onClick={() => {}}
-                    >
-                        Save Changes
-                    </button>
-                </ModalFooter>
-            </ModalBody> */}
-        </>
+                            {nextAction && nextAction.default && !isDefault && (
+                                <DropdownMenuSeparator />
+                            )}
+                        </div>
+                    );
+                })}
+            </DropdownMenuContent>
+        </DropdownMenu>
     );
 };
 

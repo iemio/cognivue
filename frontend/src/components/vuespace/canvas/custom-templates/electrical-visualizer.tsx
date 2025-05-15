@@ -85,9 +85,5 @@ function CanvasInner() {
 }
 
 export default function Canvas() {
-    return (
-        <ReactFlowProvider>
-            <CanvasInner />
-        </ReactFlowProvider>
-    );
+    return <CanvasInner />;
 }
