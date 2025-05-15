@@ -216,7 +216,7 @@ const ActionCenter = () => {
                 break;
 
             case "downloadPNG": {
-                let color = isDark ? "black" : "white";
+                const color = isDark ? "black" : "white";
 
                 // Get node bounds and viewport
                 const nodesBounds = getNodesBounds(getNodes());

@@ -42,7 +42,7 @@ export default function Rotation({
                 updateNodeData(id, { rotation: perpendicularRotation });
             updateNodeInternals(id);
         });
-
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
         selection.call(dragHandler as any);
     }, [selected, id, updateNodeData, updateNodeInternals]);
 

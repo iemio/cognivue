@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { HistoryAction } from "../types";
 import { Edge, Node, useReactFlow } from "@xyflow/react";
 

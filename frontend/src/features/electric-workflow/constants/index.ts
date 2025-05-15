@@ -6,10 +6,12 @@ export const initialEdges: Edge[] = [];
 export const initialNodes: Node[] = [];
 
 interface ComponentDefinitionWithProps {
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     icon: React.ComponentType<any> | (() => JSX.Element);
     type: ElectricalComponentType;
     label: string;
-    props?: any; // Or a more specific type for props
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    props?: any;
 }
 
 export const COMPONENTS: ComponentDefinitionWithProps[] = [

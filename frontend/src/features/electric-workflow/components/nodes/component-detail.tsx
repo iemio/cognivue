@@ -23,6 +23,7 @@ export default function ComponentDetail({
                     <Input
                         value={value}
                         //eslint-disable-next-line @typescript-eslint/no-unused-vars
+                        //eslint-disable-next-line @typescript-eslint/no-explicit-any
                         onChange={(e: any) => {
                             const newValue = e.target.value
                                 ? parseFloat(e.target.value)

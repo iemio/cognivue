@@ -1,4 +1,4 @@
-import { Handle, Node, NodeProps, Position } from "@xyflow/react";
+import { Node, NodeProps, Position } from "@xyflow/react";
 import React from "react";
 import { ElectricalComponentData, ElectricalComponentType } from "../../types";
 import BatteryIcon from "../../icons/Battery";
