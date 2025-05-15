@@ -24,21 +24,21 @@ export default function Wire({
             <BaseEdge
                 style={{
                     // stroke: "url(#wire)",
-                    stroke: "blue",
+                    stroke: "#0096FF",
                 }}
                 markerEnd={markerEnd}
                 path={d}
             />
             <circle
                 r="4"
-                fill="yellow"
+                fill="blue"
                 style={{
-                    filter: "drop-shadow(0px 0px 2px #FFC300)",
+                    filter: "drop-shadow(0px 0px 2px #00A3FF)",
                 }}
             >
                 <animateMotion dur="6s" repeatCount={"indefinite"} path={d} />
             </circle>
-            <circle fill="transparent" stroke="yellow" strokeWidth={2}>
+            <circle fill="transparent" stroke="blue" strokeWidth={2}>
                 <animate
                     attributeName="r"
                     values="2;6"

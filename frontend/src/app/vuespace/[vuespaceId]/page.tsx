@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import Editor from "@/components/vuespace/slate/Editor";
 import { useIsMobile } from "@/lib/hooks/use-mobile";
 import { cn } from "@/lib/utils";
-import Canvas from "@/features/schema-visualizer/components/wrokflow";
+import Canvas from "@/features/electric-workflow/components/workflow";
 
 const Page = () => {
     const [option, setOption] = useState<"Canvas" | "Document" | "Both">(

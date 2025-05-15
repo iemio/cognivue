@@ -16,7 +16,7 @@ export default function Battery({
     return (
         <div className="relative inline-block">
             <BatteryIcon height={48} />
-            <span className="text-[0.625rem] absolute top-[22px] left-[14px] text-white">
+            <span className="text-[0.425rem] absolute top-[27px] left-[18px] text-white">
                 {value} {unit}
             </span>
             <Terminal

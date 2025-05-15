@@ -3,3 +3,4 @@ export { default as Resistor } from "./Resistor";
 export { default as Battery } from "./Battery";
 export { default as Inductor } from "./Inductor";
 export { default as Bulb } from "./Bulb";
+export { default as Board } from "./board";

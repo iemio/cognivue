@@ -18,6 +18,7 @@ export type ElectricalComponentData = {
     rotation?: number;
     state?: ElectricalComponentState;
     isAttachedToGroup?: boolean;
+    isDragging?: boolean;
     visible?: boolean;
     connectable?: boolean;
 };

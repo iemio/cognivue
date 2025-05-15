@@ -1,5 +1,4 @@
 import {
-    Handle,
     Node,
     NodeProps,
     Position,
@@ -98,10 +97,7 @@ export default function Bulb({
     return (
         <div className="relative">
             <BulbIcon isOn={isOn} height={64} color={color} />
-            <span
-                className="text-xxs absolute"
-                style={{ color, top: 0, left: 0 }}
-            >
+            <span className="text-xs absolute" style={{ color }}>
                 {value} {unit}
             </span>
             <Terminal

@@ -22,7 +22,9 @@ export default function Board({ selected }: NodeProps<BoardNode>) {
                 boxShadow: selected ? `${color} 0px 0px 4px` : undefined,
             }}
         >
-            {selected && <NodeResizer minWidth={200} minHeight={200} />}
+            {/* Add margin wrapper around NodeResizer */}
+            <NodeResizer minWidth={200} minHeight={200} isVisible={selected} />
+
             {!showContent && <Placeholder />}
         </div>
     );

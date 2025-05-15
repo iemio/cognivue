@@ -53,11 +53,11 @@ export default function Rotation({
             ref={rotatorRef}
             style={{
                 position: "absolute",
-                width: 10,
-                height: 10,
+                width: 8,
+                height: 8,
                 background: "#3376d9",
                 left: "50%",
-                top: -30,
+                top: -25,
                 borderRadius: "100%",
                 transform: "translate(-50%, 120%)",
                 cursor: "pointer",

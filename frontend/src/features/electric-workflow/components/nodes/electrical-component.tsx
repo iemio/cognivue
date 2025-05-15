@@ -11,6 +11,7 @@ import Terminal from "./terminal";
 import Rotation from "./rotation";
 import { Lock, Plus, Unlock, X } from "lucide-react";
 import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
 
 type ElectricalComponentNode = Node<ElectricalComponentData, "string">;
 
@@ -20,6 +21,7 @@ export default function ElectricalComponent({
         type,
         rotation,
         state,
+        isDragging,
         isAttachedToGroup,
         visible = true,
         connectable,
@@ -42,22 +44,22 @@ export default function ElectricalComponent({
 
     return (
         <div
-            className="relative"
+            className={cn(
+                "relative",
+                isAdditionValid &&
+                    "bg-emerald-300/50 backdrop-blur-xs border border-emerald-600 p-1",
+                isAdditionInvalid &&
+                    "bg-red-300/50 backdrop-blur-xs border border-red-600 p-1"
+            )}
             style={{
                 transform: `rotate(${rotation}deg)`,
-                background: isAdditionValid
-                    ? "#58ed58"
-                    : isAdditionInvalid
-                    ? "#ff0505"
-                    : undefined,
                 visibility: visible ? "visible" : "hidden",
             }}
         >
-            <Rotation selected={selected} id={id} />
+            {!isDragging && <Rotation selected={selected} id={id} />}
             {parentId && selected && (
                 <div
-                    className="absolute"
-                    style={{ top: -23, right: 20, color, cursor: "pointer" }}
+                    className="absolute -top-5 right-2 cursor-pointer"
                     onClick={() => {
                         updateNode(id, (prevNode) => ({
                             extent:
@@ -76,7 +78,11 @@ export default function ElectricalComponent({
                             : "Attach to group"
                     }
                 >
-                    {isAttachedToGroup ? <Lock /> : <Unlock />}
+                    {isAttachedToGroup ? (
+                        <Lock className="size-4" />
+                    ) : (
+                        <Unlock className="size-4" />
+                    )}
                 </div>
             )}
             {type === ElectricalComponentType.Resistor && (
@@ -88,23 +94,19 @@ export default function ElectricalComponent({
             {type === ElectricalComponentType.Inductor && (
                 <Inductor height={24} color={color} />
             )}
-            <span
-                className="text-xxs absolute"
-                style={{ color, top: 0, left: 0 }}
-            >
-                {value} {unit}
-            </span>
+            {!isDragging && (
+                <span className="text-[0.6rem] absolute" style={{ color }}>
+                    {value} {unit}
+                </span>
+            )}
             {isAdditionValid && (
                 <Plus
-                    style={{ position: "absolute", top: -17, right: 2 }}
+                    className="absolute -top-4 right-1 size-3"
                     color={color}
                 />
             )}
             {isAdditionInvalid && (
-                <X
-                    style={{ position: "absolute", top: -17, right: 2 }}
-                    color={color}
-                />
+                <X className="absolute -top-4 right-1 size-3" color={color} />
             )}
             <Terminal
                 type="target"
