@@ -36,6 +36,10 @@ import { isPointInBox, zoomSelector } from "../utils";
 import ComponentDetail from "./nodes/component-detail";
 import useKeyBindings from "../hooks/useKeyBindings";
 import ToolPanel from "./common/toolbar";
+import { Button } from "@/components/ui/button";
+import { pusher } from "@/lib/config/pusher";
+import { API_URL } from "@/lib/api";
+// import { useUpdateData } from "../hooks/useUpdateData";
 
 const nodeTypes = {
     electricalComponent: ElectricalComponent,
@@ -48,7 +52,7 @@ const edgeTypes = {
     wire: Wire,
 };
 
-function CanvasInner() {
+function CanvasInner({ vuespaceId }: FlowEditorProps) {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
@@ -75,11 +79,6 @@ function CanvasInner() {
 
     const reactFlowWrapper = useRef<HTMLDivElement>(null);
 
-    const [rfInstance, setRfInstance] = useState<ReactFlowInstance<
-        Node,
-        Edge
-    > | null>(null);
-
     const isValidConnection = (connection: Edge | Connection) => {
         const { source, target } = connection;
 
@@ -89,6 +88,7 @@ function CanvasInner() {
 
     const [selectedNode, setSelectedNode] = useState<Node | undefined>();
 
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onNodeClick = (event: React.MouseEvent<Element>, node: Node) => {
         setSelectedNode(node);
         console.log(node);
@@ -419,6 +419,13 @@ function CanvasInner() {
 
     // Key bindings
     useKeyBindings({ removeNode, undo, redo });
+
+    const [rfInstance, setRfInstance] = useState<ReactFlowInstance<
+        Node,
+        Edge
+    > | null>(null);
+    // const { mutateAsync: saveFlow, isPending } = useUpdateData();
+
     //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onSave = () => {
         if (rfInstance) {
@@ -427,6 +434,39 @@ function CanvasInner() {
             // saveFlow(flow);
         }
     };
+
+    useEffect(() => {
+        const channel = pusher.subscribe(`workflow_${vuespaceId}`);
+        channel.bind("graph-updated", (data: { flow: any }) => {
+            const { nodes, edges, viewport } = data.flow;
+            setNodes(nodes);
+            setEdges(edges);
+            if (viewport) setViewport(viewport);
+        });
+
+        return () => {
+            channel.unbind_all();
+            pusher.unsubscribe(`workflow_${vuespaceId}`);
+        };
+    }, [vuespaceId]);
+
+    const { toObject } = useReactFlow();
+
+    const sendChange = async () => {
+        const payload = {
+            room_id: vuespaceId,
+            flow: toObject(), // includes nodes, edges, and viewport
+        };
+
+        await fetch(`${API_URL}/workflow/save`, {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+    };
+
     return (
         <main className="flex-1 flex items-stretch">
             <div className="w-full" ref={reactFlowWrapper}>
@@ -436,6 +476,7 @@ function CanvasInner() {
                     edges={edges}
                     onNodesChange={onNodesChange}
                     onEdgesChange={onEdgesChange}
+                    onMoveEnd={sendChange}
                     onConnect={onConnect}
                     nodeTypes={nodeTypes}
                     edgeTypes={edgeTypes}
@@ -493,7 +534,7 @@ function CanvasInner() {
                                 />
                             </div>
                         )}
-                        {/* <Button aria-label="Save" onClick={onSave} />{" "} */}
+                        <Button aria-label="Save" onClick={onSave} />{" "}
                     </Panel>
                     <ToolPanel onDragStart={onDragStart} />
 
@@ -504,10 +545,14 @@ function CanvasInner() {
     );
 }
 
-export default function Canvas() {
+type FlowEditorProps = {
+    vuespaceId: string;
+};
+
+export default function Canvas({ vuespaceId }: FlowEditorProps) {
     return (
         <ReactFlowProvider>
-            <CanvasInner />
+            <CanvasInner vuespaceId={vuespaceId} />
         </ReactFlowProvider>
     );
 }

@@ -1,5 +1,13 @@
 import { Edge, Node } from "@xyflow/react";
-import { Battery, Bulb, Capacitor, Inductor, Resistor, Board } from "../icons";
+import {
+    Battery,
+    Bulb,
+    Capacitor,
+    Inductor,
+    Resistor,
+    Board,
+    Ground,
+} from "../icons";
 import { ElectricalComponentType } from "../types";
 import { JSX } from "react";
 export const initialEdges: Edge[] = [];
@@ -49,5 +57,10 @@ export const COMPONENTS: ComponentDefinitionWithProps[] = [
         icon: Board,
         type: ElectricalComponentType.Board,
         label: "Bulb",
+    },
+    {
+        icon: Ground,
+        type: ElectricalComponentType.Ground,
+        label: "Ground",
     },
 ];

@@ -6,13 +6,17 @@ import Editor from "@/components/vuespace/slate/Editor";
 import { useIsMobile } from "@/lib/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import Canvas from "@/features/electric-workflow/components/workflow";
+import { useParams } from "next/navigation";
 
 const Page = () => {
     const [option, setOption] = useState<"Canvas" | "Document" | "Both">(
         "Canvas"
     );
     const isMobile = useIsMobile();
-    console.log("option", option);
+    // console.log("option", option);
+    const params = useParams();
+    const vuespaceId = params.vuespaceId as string;
+
     return (
         <div
             className={cn(
@@ -23,7 +27,7 @@ const Page = () => {
             <Header setOption={setOption} option={option} />
             {/* <div> */}
             {option !== "Canvas" && <Editor />}
-            {option !== "Document" && <Canvas />}
+            {option !== "Document" && <Canvas vuespaceId={vuespaceId} />}
         </div>
     );
 };

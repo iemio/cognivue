@@ -5,6 +5,9 @@ export enum ElectricalComponentType {
     Inductor = "inductor",
     Battery = "battery",
     Board = "board",
+    Ground = "ground",
+    Ammeter = "ammeter",
+    Voltmeter = "Voltmeter",
 }
 
 export enum ElectricalComponentState {
