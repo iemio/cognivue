@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
     ReactFlow,
     ReactFlowProvider,
@@ -39,6 +39,8 @@ import ToolPanel from "./common/toolbar";
 import { Button } from "@/components/ui/button";
 import { pusher } from "@/lib/config/pusher";
 import { API_URL } from "@/lib/api";
+import debounce from "lodash/debounce";
+import { useData } from "../hooks/useData";
 // import { useUpdateData } from "../hooks/useUpdateData";
 
 const nodeTypes = {
@@ -452,20 +454,48 @@ function CanvasInner({ vuespaceId }: FlowEditorProps) {
 
     const { toObject } = useReactFlow();
 
-    const sendChange = async () => {
-        const payload = {
-            room_id: vuespaceId,
-            flow: toObject(), // includes nodes, edges, and viewport
-        };
+    const sendChange = useMemo(
+        () =>
+            debounce(async () => {
+                const payload = {
+                    room_id: vuespaceId,
+                    flow: toObject(), // includes nodes, edges, and viewport
+                };
 
-        await fetch(`${API_URL}/workflow/save`, {
-            method: "POST",
-            body: JSON.stringify(payload),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+                await fetch(`${API_URL}/workflow/save`, {
+                    method: "POST",
+                    body: JSON.stringify(payload),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+            }, 500), // Debounce delay in ms
+        [vuespaceId]
+    );
+
+    const handleNodesChange = (changes: any) => {
+        onNodesChange(changes); // update nodes state
+        sendChange();
     };
+
+    const handleEdgesChange = (changes: any) => {
+        onEdgesChange(changes); // update edges state
+        sendChange();
+    };
+
+    const { data: reactFlowState } = useData(vuespaceId);
+
+    useEffect(() => {
+        if (reactFlowState?.flow) {
+            const { x = 0, y = 0, zoom = 1 } = reactFlowState.flow.viewport;
+            setNodes(reactFlowState.flow.nodes || []);
+            setEdges(reactFlowState.flow.edges || []);
+            setViewport({ x, y, zoom });
+            {
+                console.log(reactFlowState.flow);
+            }
+        }
+    }, [reactFlowState]);
 
     return (
         <main className="flex-1 flex items-stretch">
@@ -474,8 +504,8 @@ function CanvasInner({ vuespaceId }: FlowEditorProps) {
                     onInit={setRfInstance}
                     nodes={nodes}
                     edges={edges}
-                    onNodesChange={onNodesChange}
-                    onEdgesChange={onEdgesChange}
+                    onNodesChange={handleNodesChange}
+                    onEdgesChange={handleEdgesChange}
                     onMoveEnd={sendChange}
                     onConnect={onConnect}
                     nodeTypes={nodeTypes}

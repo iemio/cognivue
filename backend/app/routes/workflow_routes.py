@@ -24,4 +24,5 @@ async def save_workflow(payload: WorkflowSaveRequest):
 @router.get("/load/{room_id}")
 async def load_workflow(room_id: str):
     data = workflow_store.get(room_id, {"nodes": [], "edges": [], "viewport": {}})
-    return {"flow": data}
+    #print(data)
+    return {"flow":data}
