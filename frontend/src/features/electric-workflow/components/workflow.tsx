@@ -41,6 +41,7 @@ import { pusher } from "@/lib/config/pusher";
 import { API_URL } from "@/lib/api";
 import debounce from "lodash/debounce";
 import { useData } from "../hooks/useData";
+import { SettingsDialog } from "@/components/dialog/settings";
 // import { useUpdateData } from "../hooks/useUpdateData";
 
 const nodeTypes = {
@@ -439,6 +440,7 @@ function CanvasInner({ vuespaceId }: FlowEditorProps) {
 
     useEffect(() => {
         const channel = pusher.subscribe(`workflow_${vuespaceId}`);
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
         channel.bind("graph-updated", (data: { flow: any }) => {
             const { nodes, edges, viewport } = data.flow;
             setNodes(nodes);
@@ -472,12 +474,12 @@ function CanvasInner({ vuespaceId }: FlowEditorProps) {
             }, 500), // Debounce delay in ms
         [vuespaceId]
     );
-
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleNodesChange = (changes: any) => {
         onNodesChange(changes); // update nodes state
         sendChange();
     };
-
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleEdgesChange = (changes: any) => {
         onEdgesChange(changes); // update edges state
         sendChange();
@@ -564,8 +566,10 @@ function CanvasInner({ vuespaceId }: FlowEditorProps) {
                                 />
                             </div>
                         )}
+                        <SettingsDialog />
                         <Button aria-label="Save" onClick={onSave} />{" "}
                     </Panel>
+
                     <ToolPanel onDragStart={onDragStart} />
 
                     <BottomPanel />

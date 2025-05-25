@@ -3,13 +3,14 @@ import Participants from "@/components/vuespace/header/participants";
 import LayoutSwitcher from "@/components/vuespace/header/layout-switcher";
 import { Separator } from "@/components/ui/separator";
 // import ThemeToggle from "@/components/theme-toggle";
-import ActionCenter from "./buttons/action-center";
+// import ActionCenter from "./buttons/action-center";
 import FileInfo from "./buttons/file-info";
 import ShareButton from "./buttons/share";
 // import Notifications from "./buttons/notifications";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/lib/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import ActionCenterX from "./buttons/try/action-center-x";
 
 interface HeaderProps {
     option: "Canvas" | "Document" | "Both";
@@ -45,7 +46,7 @@ const Header: React.FC<HeaderProps> = ({ option, setOption }) => {
                         isOutsideSidebar
                     />
 
-                    <ActionCenter />
+                    <ActionCenterX />
                 </div>
                 {/* Center area */}
                 <div className="grow flex justify-center">

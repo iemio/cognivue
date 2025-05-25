@@ -161,6 +161,8 @@
         scroll-behavior: smooth;
     }
     body {
+        pointer-events: auto !important;
+
         @apply bg-background text-foreground;
     }
     .react-flow__attribution {
