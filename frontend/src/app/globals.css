@@ -168,6 +168,9 @@
     .react-flow__attribution {
         display: none;
     }
+    .sketchnote {
+        font-family: var(--font-sketchnote);
+    }
 }
 
 @layer utilities {

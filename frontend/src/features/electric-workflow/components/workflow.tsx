@@ -19,6 +19,7 @@ import {
     reconnectEdge,
     useReactFlow,
     useStore,
+    MiniMap,
 } from "@xyflow/react";
 import "@xyflow/react/dist/base.css";
 import BottomPanel from "@/components/vuespace/canvas/custom-templates/common/bottom-panel";
@@ -36,11 +37,11 @@ import { isPointInBox, zoomSelector } from "../utils";
 import ComponentDetail from "./nodes/component-detail";
 import useKeyBindings from "../hooks/useKeyBindings";
 import ToolPanel from "./common/toolbar";
-import { Button } from "@/components/ui/button";
 import { pusher } from "@/lib/config/pusher";
 import { API_URL } from "@/lib/api";
 import debounce from "lodash/debounce";
 import { useData } from "../hooks/useData";
+import { WatercolorFilters } from "@/app/try/page";
 // import { SettingsDialog } from "@/components/dialog/settings";
 // import { useUpdateData } from "../hooks/useUpdateData";
 
@@ -544,6 +545,9 @@ function CanvasInner({ vuespaceId }: FlowEditorProps) {
                         } as React.CSSProperties
                     }
                 >
+                    <MiniMap />
+
+                    {/**enabled by default */}
                     <Background
                         variant={BackgroundVariant.Lines}
                         gap={10}
@@ -566,7 +570,7 @@ function CanvasInner({ vuespaceId }: FlowEditorProps) {
                                 />
                             </div>
                         )}
-                        <Button aria-label="Save" onClick={onSave} />{" "}
+                        {/* <Button aria-label="Save" onClick={onSave} />{" "} */}
                     </Panel>
 
                     <ToolPanel onDragStart={onDragStart} />

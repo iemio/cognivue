@@ -10,6 +10,7 @@ import {
 } from "../icons";
 import { ElectricalComponentType } from "../types";
 import { JSX } from "react";
+
 export const initialEdges: Edge[] = [];
 export const initialNodes: Node[] = [];
 

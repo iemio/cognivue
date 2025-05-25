@@ -1,4 +1,4 @@
-import { Inter, Geist_Mono } from "next/font/google";
+import { Inter, Geist_Mono, Patrick_Hand } from "next/font/google";
 import { ThemeProvider } from "../providers/theme-provider";
 import "./globals.css";
 import type { Metadata } from "next";
@@ -29,6 +29,12 @@ const fontMono = Geist_Mono({
     subsets: ["latin"],
 });
 
+const sketchnoteText = Patrick_Hand({
+    weight: "400",
+    subsets: ["latin"],
+    variable: "--font-sketchnote",
+});
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -37,7 +43,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased`}
+                className={`${fontSans.variable} ${fontMono.variable} ${sketchnoteText.variable} font-sans antialiased`}
             >
                 <ThemeProvider
                     attribute="class"
