@@ -520,7 +520,7 @@ const wrapLink = (editor: CustomEditor, url: string) => {
 };
 
 // Main Editor Component
-const SlateTextEditor: React.FC = () => {
+export default function SlateTextEditor() {
     const [value, setValue] = useState<Descendant[]>([
         {
             type: "paragraph",
@@ -606,6 +606,4 @@ const SlateTextEditor: React.FC = () => {
             </div>
         </div>
     );
-};
-
-export default SlateTextEditor;
+}
