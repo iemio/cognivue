@@ -19,7 +19,6 @@ import {
     reconnectEdge,
     useReactFlow,
     useStore,
-    MiniMap,
 } from "@xyflow/react";
 import "@xyflow/react/dist/base.css";
 import BottomPanel from "@/components/vuespace/canvas/custom-templates/common/bottom-panel";
@@ -41,7 +40,6 @@ import { pusher } from "@/lib/config/pusher";
 import { API_URL } from "@/lib/api";
 import debounce from "lodash/debounce";
 import { useData } from "../hooks/useData";
-import { WatercolorFilters } from "@/app/try/y_page";
 // import { SettingsDialog } from "@/components/dialog/settings";
 // import { useUpdateData } from "../hooks/useUpdateData";
 

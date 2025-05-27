@@ -1,27 +1,19 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import {
     ReactFlow,
     Background,
-    Controls,
-    MiniMap,
     addEdge,
     useNodesState,
     useEdgesState,
-    Handle,
-    Position,
     MarkerType,
     Node,
-    Edge,
     Connection,
-    NodeProps,
-    OnNodesChange,
-    OnEdgesChange,
     OnConnect,
     ReactFlowProvider,
     BackgroundVariant,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { Search, MessageCircle, Expand } from "lucide-react";
+import { Expand } from "lucide-react";
 import { CoreNode } from "./components/nodes/core";
 import { ConceptNode } from "./components/nodes/concept";
 import { DefinitionNode } from "./components/nodes/definition";
@@ -51,12 +43,11 @@ type FlowEditorProps = {
     vuespaceId: string;
 };
 
+//eslint-disable-next-line @typescript-eslint/no-unused-vars
 function CanvasInner({ vuespaceId }: FlowEditorProps) {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
     const [selectedNode, setSelectedNode] = useState<CustomNode | null>(null);
-    const [searchQuery, setSearchQuery] = useState<string>("");
-    const [chatQuery, setChatQuery] = useState<string>("");
     const [showSidebar, setShowSidebar] = useState<boolean>(false);
     const [nodeIdCounter, setNodeIdCounter] = useState<number>(11);
 

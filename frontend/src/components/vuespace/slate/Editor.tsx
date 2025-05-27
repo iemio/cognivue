@@ -108,7 +108,9 @@ declare module "slate" {
         undo: () => void;
         redo: () => void;
         history: {
+            //eslint-disable-next-line @typescript-eslint/no-explicit-any
             redos: any[];
+            //eslint-disable-next-line @typescript-eslint/no-explicit-any
             undos: any[];
         };
     }
