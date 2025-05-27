@@ -6,7 +6,7 @@ import { useIsMobile } from "@/lib/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import Canvas from "@/features/electric-workflow/components/workflow";
 import { useParams } from "next/navigation";
-import SlateTextEditor from "@/components/vuespace/slate/editor";
+import SlateTextEditor from "@/components/vuespace/document/editor";
 // import Canvas from "@/features/academic-workflow/workflow";
 
 const Page = () => {
