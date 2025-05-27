@@ -4,7 +4,6 @@ import {
     Descendant,
     Editor,
     Transforms,
-    Text,
     Element as SlateElement,
     BaseEditor,
     Range,
@@ -366,100 +365,110 @@ const MarkButton: React.FC<MarkButtonProps> = ({ format, editor, icon }) => (
 );
 
 const Toolbar: React.FC<{ editor: CustomEditor }> = ({ editor }) => (
-    <div className="flex flex-wrap gap-1 p-2 border-b border-gray-200 bg-gray-50">
-        <ToolbarButton
-            active={false}
-            onMouseDown={(event) => {
-                event.preventDefault();
-                editor.undo();
-            }}
-        >
-            <Undo size={18} />
-        </ToolbarButton>
-        <ToolbarButton
-            active={false}
-            onMouseDown={(event) => {
-                event.preventDefault();
-                editor.redo();
-            }}
-        >
-            <Redo size={18} />
-        </ToolbarButton>
+    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 z-50 shadow-lg">
+        <div className="flex flex-wrap gap-1 p-2 border-t border-gray-200 bg-transparent backdrop-blur-md">
+            <ToolbarButton
+                active={false}
+                onMouseDown={(event) => {
+                    event.preventDefault();
+                    editor.undo();
+                }}
+            >
+                <Undo size={18} />
+            </ToolbarButton>
+            <ToolbarButton
+                active={false}
+                onMouseDown={(event) => {
+                    event.preventDefault();
+                    editor.redo();
+                }}
+            >
+                <Redo size={18} />
+            </ToolbarButton>
 
-        <div className="w-px h-6 bg-gray-300 mx-1" />
+            <div className="w-px h-6 bg-gray-300 mx-1" />
 
-        <MarkButton format="bold" editor={editor} icon={<Bold size={18} />} />
-        <MarkButton
-            format="italic"
-            editor={editor}
-            icon={<Italic size={18} />}
-        />
-        <MarkButton
-            format="underline"
-            editor={editor}
-            icon={<Underline size={18} />}
-        />
-        <MarkButton format="code" editor={editor} icon={<Code size={18} />} />
+            <MarkButton
+                format="bold"
+                editor={editor}
+                icon={<Bold size={18} />}
+            />
+            <MarkButton
+                format="italic"
+                editor={editor}
+                icon={<Italic size={18} />}
+            />
+            <MarkButton
+                format="underline"
+                editor={editor}
+                icon={<Underline size={18} />}
+            />
+            <MarkButton
+                format="code"
+                editor={editor}
+                icon={<Code size={18} />}
+            />
 
-        <div className="w-px h-6 bg-gray-300 mx-1" />
+            <div className="w-px h-6 bg-gray-300 mx-1" />
 
-        <BlockButton
-            format="heading-one"
-            editor={editor}
-            icon={<Heading1 size={18} />}
-        />
-        <BlockButton
-            format="heading-two"
-            editor={editor}
-            icon={<Heading2 size={18} />}
-        />
-        <BlockButton
-            format="block-quote"
-            editor={editor}
-            icon={<Quote size={18} />}
-        />
-        <BlockButton
-            format="bulleted-list"
-            editor={editor}
-            icon={<List size={18} />}
-        />
-        <BlockButton
-            format="numbered-list"
-            editor={editor}
-            icon={<ListOrdered size={18} />}
-        />
+            <BlockButton
+                format="heading-one"
+                editor={editor}
+                icon={<Heading1 size={18} />}
+            />
+            <BlockButton
+                format="heading-two"
+                editor={editor}
+                icon={<Heading2 size={18} />}
+            />
+            <BlockButton
+                format="block-quote"
+                editor={editor}
+                icon={<Quote size={18} />}
+            />
+            <BlockButton
+                format="bulleted-list"
+                editor={editor}
+                icon={<List size={18} />}
+            />
+            <BlockButton
+                format="numbered-list"
+                editor={editor}
+                icon={<ListOrdered size={18} />}
+            />
 
-        <div className="w-px h-6 bg-gray-300 mx-1" />
+            <div className="w-px h-6 bg-gray-300 mx-1" />
 
-        <BlockButton
-            format="left"
-            editor={editor}
-            icon={<AlignLeft size={18} />}
-        />
-        <BlockButton
-            format="center"
-            editor={editor}
-            icon={<AlignCenter size={18} />}
-        />
-        <BlockButton
-            format="right"
-            editor={editor}
-            icon={<AlignRight size={18} />}
-        />
+            <BlockButton
+                format="left"
+                editor={editor}
+                icon={<AlignLeft size={18} />}
+            />
+            <BlockButton
+                format="center"
+                editor={editor}
+                icon={<AlignCenter size={18} />}
+            />
+            <BlockButton
+                format="right"
+                editor={editor}
+                icon={<AlignRight size={18} />}
+            />
 
-        <div className="w-px h-6 bg-gray-300 mx-1" />
+            <div className="w-px h-6 bg-gray-300 mx-1" />
 
-        <ToolbarButton
-            active={false}
-            onMouseDown={(event) => {
-                event.preventDefault();
-                const url = window.prompt("Enter the URL of the link:");
-                if (!url) return;
-                insertLink(editor, url);
-            }}
-        >
-            <Link size={18} />
-        </ToolbarButton>
+            <ToolbarButton
+                active={false}
+                onMouseDown={(event) => {
+                    event.preventDefault();
+                    const url = window.prompt("Enter the URL of the link:");
+                    if (!url) return;
+                    insertLink(editor, url);
+                }}
+            >
+                <Link size={18} />
+            </ToolbarButton>
+        </div>
     </div>
 );
 
@@ -517,7 +526,8 @@ const SlateTextEditor: React.FC = () => {
             type: "paragraph",
             children: [
                 {
-                    text: "Welcome to the tText editor! Try formatting some text.",
+                    text: "",
+                    // Welcome to the Text editor! Try formatting some text.
                 },
             ],
         },
@@ -565,7 +575,7 @@ const SlateTextEditor: React.FC = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto my-8 bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div className="min-w-4xl mx-auto my-8 bg-white border border-gray-200 rounded-lg shadow-sm">
             <Slate
                 editor={editor}
                 initialValue={value}
@@ -575,7 +585,7 @@ const SlateTextEditor: React.FC = () => {
                     <Editable
                         renderElement={renderElement}
                         renderLeaf={renderLeaf}
-                        placeholder="Start typing..."
+                        placeholder="Start typing here..."
                         onKeyDown={handleKeyDown}
                         className="min-h-screen focus:outline-none prose prose-slate max-w-none mt-15"
                     />
@@ -583,13 +593,15 @@ const SlateTextEditor: React.FC = () => {
                 <Toolbar editor={editor} />
             </Slate>
 
-            <div className="p-4 border-t border-gray-200 bg-gray-50">
-                <h3 className="font-semibold mb-2">Keyboard Shortcuts:</h3>
-                <div className="text-sm text-gray-600 grid grid-cols-2 gap-2">
-                    {/* <div>Ctrl/Cmd + B: Bold</div>
+            <div className="fixed bottom-6 right-6 bg-white border border-gray-200 rounded-lg shadow-lg p-3 text-xs text-gray-600 max-w-xs">
+                <div className="font-semibold mb-2">Keyboard Shortcuts:</div>
+                <div className="space-y-1">
+                    <div>Ctrl/Cmd + B: Bold</div>
                     <div>Ctrl/Cmd + I: Italic</div>
                     <div>Ctrl/Cmd + U: Underline</div>
-                    <div>Ctrl/Cmd + `: Code</div> */}
+                    <div>Ctrl/Cmd + `: Code</div>
+                    <div>Ctrl/Cmd + Z: Undo</div>
+                    <div>Ctrl/Cmd + Shift + Z: Redo</div>
                 </div>
             </div>
         </div>
