@@ -18,223 +18,21 @@ import {
     OnEdgesChange,
     OnConnect,
     ReactFlowProvider,
+    BackgroundVariant,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import {
-    Book,
-    HelpCircle,
-    FileText,
-    Lightbulb,
-    Quote,
-    StickyNote,
-    Tag,
-    Folder,
-    Search,
-    Plus,
-    MessageCircle,
-    Expand,
-    ChevronDown,
-    ChevronRight,
-    ExternalLink,
-    Brain,
-} from "lucide-react";
-
-// Type definitions
-type NodeType =
-    | "core"
-    | "concept"
-    | "definition"
-    | "example"
-    | "question"
-    | "citation"
-    | "note"
-    | "fact"
-    | "topic_group";
-
-type CustomNodeData = {
-    label: string;
-    expanded?: boolean;
-    childCount?: number;
-};
-
-type CustomNode = Node<CustomNodeData, NodeType>;
-
-type CustomEdge = Edge & {
-    label?: string;
-    labelStyle?: React.CSSProperties;
-};
-
-interface SubConcepts {
-    [key: string]: string[];
-}
-
-interface AIResponses {
-    [key: string]: string;
-}
-
-// Custom Node Components
-const CoreNode: React.FC<NodeProps<CustomNode>> = ({ data, selected }) => (
-    <div
-        className={`px-6 py-4 rounded-lg border-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-lg shadow-lg ${
-            selected ? "ring-2 ring-yellow-400" : ""
-        }`}
-    >
-        <Handle type="target" position={Position.Top} />
-        <div className="flex items-center gap-2">
-            <Brain size={20} />
-            {data.label}
-        </div>
-        <Handle type="source" position={Position.Bottom} />
-    </div>
-);
-
-const ConceptNode: React.FC<NodeProps<CustomNode>> = ({ data, selected }) => (
-    <div
-        className={`px-4 py-3 rounded-xl border bg-gradient-to-r from-green-100 to-blue-100 shadow-md ${
-            selected ? "ring-2 ring-yellow-400" : ""
-        }`}
-    >
-        <Handle type="target" position={Position.Top} />
-        <div className="flex items-center gap-2">
-            <Lightbulb size={16} className="text-green-600" />
-            <span className="font-medium">{data.label}</span>
-        </div>
-        <Handle type="source" position={Position.Bottom} />
-    </div>
-);
-
-const DefinitionNode: React.FC<NodeProps<CustomNode>> = ({
-    data,
-    selected,
-}) => (
-    <div
-        className={`px-3 py-2 rounded-lg border bg-yellow-50 shadow-sm italic ${
-            selected ? "ring-2 ring-yellow-400" : ""
-        }`}
-    >
-        <Handle type="target" position={Position.Top} />
-        <div className="flex items-center gap-2">
-            <FileText size={14} className="text-yellow-600" />
-            <span className="text-sm">{data.label}</span>
-        </div>
-        <Handle type="source" position={Position.Bottom} />
-    </div>
-);
-
-const ExampleNode: React.FC<NodeProps<CustomNode>> = ({ data, selected }) => (
-    <div
-        className={`px-4 py-3 rounded-lg border-2 border-dashed border-orange-300 bg-orange-50 shadow-md ${
-            selected ? "ring-2 ring-yellow-400" : ""
-        }`}
-    >
-        <Handle type="target" position={Position.Top} />
-        <div className="flex items-center gap-2">
-            <Tag size={16} className="text-orange-600" />
-            <span className="font-medium text-orange-800">{data.label}</span>
-        </div>
-        <Handle type="source" position={Position.Bottom} />
-    </div>
-);
-
-const QuestionNode: React.FC<NodeProps<CustomNode>> = ({ data, selected }) => (
-    <div
-        className={`px-4 py-3 rounded-full border-2 border-purple-300 bg-purple-50 shadow-md ${
-            selected ? "ring-2 ring-yellow-400" : ""
-        }`}
-    >
-        <Handle type="target" position={Position.Top} />
-        <div className="flex items-center gap-2">
-            <HelpCircle size={16} className="text-purple-600" />
-            <span className="text-purple-800">{data.label}</span>
-        </div>
-        <Handle type="source" position={Position.Bottom} />
-    </div>
-);
-
-const CitationNode: React.FC<NodeProps<CustomNode>> = ({ data, selected }) => (
-    <div
-        className={`px-3 py-2 rounded-md border bg-gray-100 shadow-sm ${
-            selected ? "ring-2 ring-yellow-400" : ""
-        }`}
-    >
-        <Handle type="target" position={Position.Top} />
-        <div className="flex items-center gap-2">
-            <Quote size={12} className="text-gray-600" />
-            <ExternalLink size={12} className="text-gray-600" />
-            <span className="text-xs text-gray-700">{data.label}</span>
-        </div>
-        <Handle type="source" position={Position.Bottom} />
-    </div>
-);
-
-const NoteNode: React.FC<NodeProps<CustomNode>> = ({ data, selected }) => (
-    <div
-        className={`px-3 py-2 rounded-lg border bg-yellow-200 shadow-md transform rotate-1 ${
-            selected ? "ring-2 ring-yellow-400" : ""
-        }`}
-    >
-        <Handle type="target" position={Position.Top} />
-        <div className="flex items-center gap-2">
-            <StickyNote size={14} className="text-yellow-700" />
-            <span className="text-xs text-yellow-800">{data.label}</span>
-        </div>
-        <Handle type="source" position={Position.Bottom} />
-    </div>
-);
-
-const FactNode: React.FC<NodeProps<CustomNode>> = ({ data, selected }) => (
-    <div
-        className={`px-3 py-2 transform rotate-45 bg-indigo-100 border border-indigo-300 shadow-md ${
-            selected ? "ring-2 ring-yellow-400" : ""
-        }`}
-    >
-        <Handle type="target" position={Position.Top} />
-        <div className="transform -rotate-45 flex items-center gap-1">
-            <Tag size={12} className="text-indigo-600" />
-            <span className="text-xs text-indigo-800">{data.label}</span>
-        </div>
-        <Handle type="source" position={Position.Bottom} />
-    </div>
-);
-
-const TopicGroupNode: React.FC<NodeProps<CustomNode>> = ({
-    data,
-    selected,
-}) => {
-    const [isExpanded, setIsExpanded] = useState<boolean>(
-        data.expanded || false
-    );
-
-    return (
-        <div
-            className={`px-4 py-3 rounded-lg border-2 border-gray-400 bg-gray-50 shadow-lg ${
-                selected ? "ring-2 ring-yellow-400" : ""
-            }`}
-        >
-            <Handle type="target" position={Position.Top} />
-            <div className="flex items-center gap-2">
-                <Folder size={16} className="text-gray-600" />
-                <span className="font-medium text-gray-800">{data.label}</span>
-                <button
-                    onClick={() => setIsExpanded(!isExpanded)}
-                    className="ml-2 hover:bg-gray-200 rounded p-1"
-                >
-                    {isExpanded ? (
-                        <ChevronDown size={14} />
-                    ) : (
-                        <ChevronRight size={14} />
-                    )}
-                </button>
-            </div>
-            {isExpanded && (
-                <div className="mt-2 text-xs text-gray-600">
-                    {data.childCount || 0} items
-                </div>
-            )}
-            <Handle type="source" position={Position.Bottom} />
-        </div>
-    );
-};
+import { Search, MessageCircle, Expand } from "lucide-react";
+import { CoreNode } from "./components/nodes/core";
+import { ConceptNode } from "./components/nodes/concept";
+import { DefinitionNode } from "./components/nodes/definition";
+import { ExampleNode } from "./components/nodes/example";
+import { QuestionNode } from "./components/nodes/question";
+import { CitationNode } from "./components/nodes/citation";
+import { FactNode } from "./components/nodes/fact";
+import { TopicGroupNode } from "./components/nodes/topic";
+import { initialEdges, initialNodes } from "./constants";
+import { NoteNode } from "./components/nodes/note";
+import { CustomEdge, CustomNode, NodeType, SubConcepts } from "./types";
 
 // Node type mapping
 const nodeTypes = {
@@ -249,138 +47,6 @@ const nodeTypes = {
     topic_group: TopicGroupNode,
 };
 
-// Initial nodes and edges
-const initialNodes: CustomNode[] = [
-    {
-        id: "1",
-        type: "core",
-        position: { x: 400, y: 50 },
-        data: { label: "Machine Learning" },
-    },
-    {
-        id: "2",
-        type: "concept",
-        position: { x: 200, y: 200 },
-        data: { label: "Supervised Learning" },
-    },
-    {
-        id: "3",
-        type: "concept",
-        position: { x: 600, y: 200 },
-        data: { label: "Unsupervised Learning" },
-    },
-    {
-        id: "4",
-        type: "definition",
-        position: { x: 400, y: 350 },
-        data: {
-            label: "Overfitting: Model performs well on training data but poorly on new data",
-        },
-    },
-    {
-        id: "5",
-        type: "example",
-        position: { x: 100, y: 350 },
-        data: { label: "Spam Detection in Gmail" },
-    },
-    {
-        id: "6",
-        type: "question",
-        position: { x: 700, y: 350 },
-        data: { label: "Why is overfitting bad?" },
-    },
-    {
-        id: "7",
-        type: "citation",
-        position: { x: 300, y: 500 },
-        data: { label: "(Bishop, Pattern Recognition, 2006)" },
-    },
-    {
-        id: "8",
-        type: "note",
-        position: { x: 500, y: 500 },
-        data: { label: "Need to study regularization" },
-    },
-    {
-        id: "9",
-        type: "fact",
-        position: { x: 600, y: 500 },
-        data: { label: "Gradient descent updates weights" },
-    },
-    {
-        id: "10",
-        type: "topic_group",
-        position: { x: 50, y: 50 },
-        data: { label: "Types of Learning", childCount: 3 },
-    },
-];
-
-const initialEdges: CustomEdge[] = [
-    {
-        id: "e1-2",
-        source: "1",
-        target: "2",
-        type: "smoothstep",
-        label: "includes",
-        labelStyle: { fontSize: 12, fontWeight: "bold" },
-        markerEnd: { type: MarkerType.ArrowClosed },
-    },
-    {
-        id: "e1-3",
-        source: "1",
-        target: "3",
-        type: "smoothstep",
-        label: "includes",
-        labelStyle: { fontSize: 12, fontWeight: "bold" },
-        markerEnd: { type: MarkerType.ArrowClosed },
-    },
-    {
-        id: "e2-4",
-        source: "2",
-        target: "4",
-        type: "smoothstep",
-        label: "explains",
-        labelStyle: { fontSize: 12, fontWeight: "bold" },
-        markerEnd: { type: MarkerType.ArrowClosed },
-    },
-    {
-        id: "e2-5",
-        source: "2",
-        target: "5",
-        type: "smoothstep",
-        label: "example of",
-        labelStyle: { fontSize: 12, fontWeight: "bold" },
-        markerEnd: { type: MarkerType.ArrowClosed },
-    },
-    {
-        id: "e4-6",
-        source: "4",
-        target: "6",
-        type: "smoothstep",
-        label: "answers",
-        labelStyle: { fontSize: 12, fontWeight: "bold" },
-        markerEnd: { type: MarkerType.ArrowClosed },
-    },
-    {
-        id: "e4-7",
-        source: "4",
-        target: "7",
-        type: "smoothstep",
-        label: "source",
-        labelStyle: { fontSize: 12, fontWeight: "bold" },
-        markerEnd: { type: MarkerType.ArrowClosed },
-    },
-    {
-        id: "e10-2",
-        source: "10",
-        target: "2",
-        type: "smoothstep",
-        label: "contains",
-        labelStyle: { fontSize: 12, fontWeight: "bold" },
-        markerEnd: { type: MarkerType.ArrowClosed },
-    },
-];
-
 type FlowEditorProps = {
     vuespaceId: string;
 };
@@ -393,6 +59,8 @@ function CanvasInner({ vuespaceId }: FlowEditorProps) {
     const [chatQuery, setChatQuery] = useState<string>("");
     const [showSidebar, setShowSidebar] = useState<boolean>(false);
     const [nodeIdCounter, setNodeIdCounter] = useState<number>(11);
+
+    const reactFlowWrapper = useRef<HTMLDivElement>(null);
 
     const onConnect: OnConnect = useCallback(
         (params: Connection) => {
@@ -408,11 +76,32 @@ function CanvasInner({ vuespaceId }: FlowEditorProps) {
         },
         [setEdges]
     );
-
     const onNodeClick = useCallback((_event: React.MouseEvent, node: Node) => {
         setSelectedNode(node as CustomNode);
         setShowSidebar(true);
     }, []);
+
+    const getNodeExplanation = (nodeType: NodeType): string => {
+        const explanations: Record<NodeType, string> = {
+            core: "This is a central concept that serves as the foundation for understanding related topics.",
+            concept:
+                "This represents a key idea or principle that helps build understanding of the broader topic.",
+            definition:
+                "This provides a clear explanation of what a term or concept means.",
+            example:
+                "This is a concrete instance that illustrates how the concept applies in practice.",
+            question:
+                "This represents an inquiry that can deepen understanding of the topic.",
+            citation:
+                "This is a reference to external source material that supports or explains the concept.",
+            note: "This is a personal annotation or reminder related to the concept.",
+            fact: "This is a specific piece of information that is definitively true about the concept.",
+            topic_group:
+                "This groups related concepts together for better organization.",
+        };
+
+        return explanations[nodeType];
+    };
 
     const generateSubConcepts = (conceptName: string): string[] => {
         // Simulated AI-generated sub-concepts
@@ -478,206 +167,47 @@ function CanvasInner({ vuespaceId }: FlowEditorProps) {
         setNodeIdCounter((prev) => prev + subConcepts.length);
     };
 
-    const handleSearch = (): void => {
-        // Simulated semantic search - highlight relevant nodes
-        const matchingNodes = nodes.filter((node) =>
-            node.data.label.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-
-        setNodes((nds) =>
-            nds.map((node) => ({
-                ...node,
-                style: matchingNodes.includes(node)
-                    ? {
-                          ...node.style,
-                          background: "#fef3c7",
-                          border: "2px solid #f59e0b",
-                      }
-                    : {
-                          ...node.style,
-                          background: undefined,
-                          border: undefined,
-                      },
-            }))
-        );
-    };
-
-    const handleChatQuery = (): void => {
-        // Simulated AI response
-        const responses: AIResponses = {
-            overfitting:
-                "Overfitting occurs when a model learns the training data too well, including noise and random fluctuations. This leads to poor generalization on new, unseen data.",
-            "cnn vs rnn":
-                "CNNs (Convolutional Neural Networks) are designed for spatial data like images, using convolution operations. RNNs (Recurrent Neural Networks) are designed for sequential data like text or time series.",
-            "gradient descent":
-                "Gradient descent is an optimization algorithm that iteratively adjusts model parameters in the direction that minimizes the loss function.",
-        };
-
-        const lowerQuery = chatQuery.toLowerCase();
-        let response =
-            "I can help explain concepts in your knowledge map. Try asking about specific topics!";
-
-        for (const [key, value] of Object.entries(responses)) {
-            if (lowerQuery.includes(key)) {
-                response = value;
-                break;
-            }
-        }
-
-        alert(response); // In a real app, this would be a proper chat interface
-    };
-
-    const addNode = (type: NodeType): void => {
-        const newNode: CustomNode = {
-            id: `${nodeIdCounter}`,
-            type: type,
-            position: { x: 400, y: 300 },
-            data: { label: `New ${type}` },
-        };
-
-        setNodes((nds) => [...nds, newNode]);
-        setNodeIdCounter((prev) => prev + 1);
-    };
-
-    const getNodeExplanation = (nodeType: NodeType): string => {
-        const explanations: Record<NodeType, string> = {
-            core: "This is a central concept that serves as the foundation for understanding related topics.",
-            concept:
-                "This represents a key idea or principle that helps build understanding of the broader topic.",
-            definition:
-                "This provides a clear explanation of what a term or concept means.",
-            example:
-                "This is a concrete instance that illustrates how the concept applies in practice.",
-            question:
-                "This represents an inquiry that can deepen understanding of the topic.",
-            citation:
-                "This is a reference to external source material that supports or explains the concept.",
-            note: "This is a personal annotation or reminder related to the concept.",
-            fact: "This is a specific piece of information that is definitively true about the concept.",
-            topic_group:
-                "This groups related concepts together for better organization.",
-        };
-
-        return explanations[nodeType];
-    };
-
-    const getNodeColor = (nodeType: string): string => {
-        const colors: Record<string, string> = {
-            core: "#3b82f6",
-            concept: "#10b981",
-            definition: "#f59e0b",
-            example: "#f97316",
-            question: "#8b5cf6",
-            citation: "#6b7280",
-            note: "#eab308",
-            fact: "#6366f1",
-            topic_group: "#9ca3af",
-        };
-
-        return colors[nodeType] || "#6b7280";
-    };
-
     return (
-        <div className="h-screen flex">
-            {/* Main Flow Area */}
-            <div className="flex-1 relative">
-                {/* Header */}
-                <div className="absolute top-0 left-0 right-0 z-10 bg-white shadow-md p-4 flex items-center gap-4">
-                    <h1 className="text-xl font-bold text-gray-800">
-                        Academic Knowledge Workflow
-                    </h1>
-
-                    {/* Search */}
-                    <div className="flex items-center gap-2">
-                        <input
-                            type="text"
-                            placeholder="Semantic search..."
-                            value={searchQuery}
-                            onChange={(
-                                e: React.ChangeEvent<HTMLInputElement>
-                            ) => setSearchQuery(e.target.value)}
-                            className="px-3 py-1 border rounded-md text-sm"
-                        />
-                        <button
-                            onClick={handleSearch}
-                            className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 flex items-center gap-1"
-                        >
-                            <Search size={14} />
-                        </button>
-                    </div>
-
-                    {/* Chat */}
-                    <div className="flex items-center gap-2">
-                        <input
-                            type="text"
-                            placeholder="Ask about concepts..."
-                            value={chatQuery}
-                            onChange={(
-                                e: React.ChangeEvent<HTMLInputElement>
-                            ) => setChatQuery(e.target.value)}
-                            className="px-3 py-1 border rounded-md text-sm"
-                        />
-                        <button
-                            onClick={handleChatQuery}
-                            className="px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 flex items-center gap-1"
-                        >
-                            <MessageCircle size={14} />
-                        </button>
-                    </div>
-
-                    {/* Add Node Dropdown */}
-                    <div className="relative">
-                        <select
-                            onChange={(
-                                e: React.ChangeEvent<HTMLSelectElement>
-                            ) => {
-                                const value = e.target.value as NodeType;
-                                if (value) addNode(value);
-                            }}
-                            className="px-3 py-1 border rounded-md text-sm"
-                            defaultValue=""
-                        >
-                            <option value="" disabled>
-                                Add Node
-                            </option>
-                            <option value="core">Core Topic</option>
-                            <option value="concept">Concept</option>
-                            <option value="definition">Definition</option>
-                            <option value="example">Example</option>
-                            <option value="question">Question</option>
-                            <option value="citation">Citation</option>
-                            <option value="note">Note</option>
-                            <option value="fact">Fact</option>
-                            <option value="topic_group">Topic Group</option>
-                        </select>
-                    </div>
-                </div>
-
-                {/* React Flow */}
-                <div className="h-full pt-16 mt-50">
-                    <ReactFlow
-                        nodes={nodes}
-                        edges={edges}
-                        onNodesChange={onNodesChange}
-                        onEdgesChange={onEdgesChange}
-                        onConnect={onConnect}
-                        onNodeClick={onNodeClick}
-                        nodeTypes={nodeTypes}
-                        fitView
-                        className="bg-gray-50"
-                    >
-                        <Background color="#e5e7eb" gap={20} />
-                        <Controls />
-                        <MiniMap
-                            nodeColor={(node: Node) =>
-                                getNodeColor(node.type || "default")
-                            }
-                        />
-                    </ReactFlow>
-                </div>
+        <main className="flex-1 flex items-stretch">
+            <div className="w-full" ref={reactFlowWrapper}>
+                <ReactFlow
+                    nodes={nodes}
+                    edges={edges}
+                    onNodesChange={onNodesChange}
+                    onEdgesChange={onEdgesChange}
+                    nodeTypes={nodeTypes}
+                    onConnect={onConnect}
+                    onNodeClick={onNodeClick}
+                    fitView
+                    minZoom={0.5}
+                    maxZoom={1}
+                    defaultEdgeOptions={{
+                        type: "custom",
+                        className: "opacity-25",
+                    }}
+                    style={
+                        {
+                            "--xy-background-pattern-dots-color-default":
+                                "var(--color-border)",
+                            "--xy-edge-stroke-width-default": 1.5,
+                            "--xy-edge-stroke-default":
+                                "var(--color-foreground)",
+                            "--xy-edge-stroke-selected-default":
+                                "var(--color-foreground)",
+                            "--xy-attribution-background-color-default":
+                                "transparent",
+                        } as React.CSSProperties
+                    }
+                    // attributionPosition="bottom-left" // you should remove this line if you don't want to show the attribution
+                >
+                    <Background
+                        variant={BackgroundVariant.Dots}
+                        gap={20}
+                        size={2}
+                    />
+                </ReactFlow>
             </div>
 
-            {/* Sidebar */}
             {showSidebar && selectedNode && (
                 <div className="w-80 bg-white border-l shadow-lg p-4 overflow-y-auto">
                     <div className="flex items-center justify-between mb-4">
@@ -725,7 +255,7 @@ function CanvasInner({ vuespaceId }: FlowEditorProps) {
                     </div>
                 </div>
             )}
-        </div>
+        </main>
     );
 }
 

@@ -68,6 +68,9 @@
         "react-dropzone": "^14.3.8",
         "react-icons": "^5.5.0",
         "react-use-measure": "^2.1.7",
+        "slate": "^0.114.0",
+        "slate-history": "^0.113.1",
+        "slate-react": "^0.114.2",
         "tailwind-merge": "^3.1.0",
         "three": "^0.176.0",
         "uuid": "^11.1.0"

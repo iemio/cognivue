@@ -41,7 +41,7 @@ import { pusher } from "@/lib/config/pusher";
 import { API_URL } from "@/lib/api";
 import debounce from "lodash/debounce";
 import { useData } from "../hooks/useData";
-import { WatercolorFilters } from "@/app/try/page";
+import { WatercolorFilters } from "@/app/try/y_page";
 // import { SettingsDialog } from "@/components/dialog/settings";
 // import { useUpdateData } from "../hooks/useUpdateData";
 
@@ -545,7 +545,7 @@ function CanvasInner({ vuespaceId }: FlowEditorProps) {
                         } as React.CSSProperties
                     }
                 >
-                    <MiniMap />
+                    {/* <MiniMap /> */}
 
                     {/**enabled by default */}
                     <Background

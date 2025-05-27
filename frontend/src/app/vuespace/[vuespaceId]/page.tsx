@@ -2,11 +2,12 @@
 import Header from "@/components/vuespace/header/header";
 // import Canvas from "@/components/vuespace/canvas/custom-templates/schema-visualizer";
 import React, { useState } from "react";
-import Editor from "@/components/vuespace/slate/Editor";
 import { useIsMobile } from "@/lib/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import Canvas from "@/features/electric-workflow/components/workflow";
 import { useParams } from "next/navigation";
+import SlateTextEditor from "@/components/vuespace/slate/editor";
+// import Canvas from "@/features/academic-workflow/workflow";
 
 const Page = () => {
     const [option, setOption] = useState<"Canvas" | "Document" | "Both">(
@@ -26,7 +27,7 @@ const Page = () => {
         >
             <Header setOption={setOption} option={option} />
             {/* <div> */}
-            {option !== "Canvas" && <Editor />}
+            {option !== "Canvas" && <SlateTextEditor />}
             {option !== "Document" && <Canvas vuespaceId={vuespaceId} />}
         </div>
     );
